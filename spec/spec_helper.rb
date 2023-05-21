@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require 'rspec/documentation'
+require 'rspec/file_fixtures'
+require 'rspec/its'
+require 'devpack'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -4,7 +4,7 @@ require_relative 'lib/rspec/documentation/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'rspec-documentation'
-  spec.version = Rspec::Documentation::VERSION
+  spec.version = RSpec::Documentation::VERSION
   spec.authors = ['Bob Farrell']
   spec.email = ['git@bob.frl']
 
@@ -26,4 +26,10 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
   spec.metadata['rubygems_mfa_required'] = 'true'
+
+  spec.add_runtime_dependency 'kramdown', '~> 2.4'
+  spec.add_runtime_dependency 'kramdown-parser-gfm', '~> 1.1'
+  spec.add_runtime_dependency 'redcarpet', '~> 3.6'
+  spec.add_runtime_dependency 'rouge', '~> 4.1'
+  spec.add_runtime_dependency 'rspec', '~> 3.12'
 end

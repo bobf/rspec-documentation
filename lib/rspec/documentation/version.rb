@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Rspec
+module RSpec
   module Documentation
     VERSION = '0.0.1'
   end

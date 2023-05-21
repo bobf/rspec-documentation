@@ -4,3 +4,5 @@ require:
 
 AllCops:
   NewCops: enable
+  Exclude:
+  - 'spec/fixtures/**/*'
