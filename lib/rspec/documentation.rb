@@ -10,25 +10,60 @@ module RSpec
   module Documentation
     class Error < StandardError; end
 
-    def self.generate_documentation
-      require_spec_helper
-      page_paths = Pathname.new(Dir.pwd).join('rspec-documentation/pages').glob('**/*.md')
-      page_collection = RSpecDocumentation::PageCollection.new(page_paths: page_paths)
-      page_collection.generate
-      return page_collection.flush if page_collection.failures.empty?
+    class << self
+      include Paintbrush
 
-      page_collection.failures.each do |failure|
-        $stderr.write(failure.message)
+      def generate_documentation
+        require_spec_helper
+        page_collection.generate
+        page_collection.flush unless failed?
+        print_summary
+        nil
       end
-    end
 
-    def self.require_spec_helper
-      path = Pathname.new(Dir.pwd).join('rspec-documentation/spec_helper.rb')
-      require path if path.file?
-    end
+      def require_spec_helper
+        path = Pathname.new(Dir.pwd).join('rspec-documentation/spec_helper.rb')
+        require path if path.file?
+      end
 
-    def self.configure(&block)
-      RSpecDocumentation.configure(&block)
+      def configure(&block)
+        RSpecDocumentation.configure(&block)
+      end
+
+      private
+
+      def print_success_summary
+        warn(paintbrush { green("\n  Created #{blue(page_paths.size)} pages.\n") })
+        warn(paintbrush { cyan("  View your documentation here: #{white(page_paths.last)}\n") })
+      end
+
+      def print_failure_summary
+        page_collection.failures.each do |failure|
+          $stderr.write(failure.message)
+        end
+      end
+
+      def page_paths
+        @page_paths ||= Pathname.new(Dir.pwd).join('rspec-documentation/pages').glob('**/*.md')
+      end
+
+      def page_collection
+        @page_collection ||= RSpecDocumentation::PageCollection.new(page_paths: page_paths)
+      end
+
+      def failed?
+        !page_collection.failures.empty?
+      end
+
+      def print_summary
+        if failed?
+          print_failure_summary
+        else
+          print_success_summary
+        end
+
+        nil
+      end
     end
   end
 end

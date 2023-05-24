@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'htmlbeautifier'
 require 'kramdown'
 require 'kramdown-parser-gfm'
+require 'paintbrush'
 require 'redcarpet'
 require 'rouge'
 require 'rouge/plugins/redcarpet'
@@ -21,6 +23,7 @@ require_relative 'rspec_documentation/spec'
 require_relative 'rspec_documentation/markdown_renderer'
 require_relative 'rspec_documentation/page_collection'
 require_relative 'rspec_documentation/page_tree'
+require_relative 'rspec_documentation/page_tree_element'
 
 # Internal module used by RSpec::Documentation to run examples and write output into an HTML document.
 module RSpecDocumentation

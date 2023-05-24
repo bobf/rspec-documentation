@@ -19,7 +19,8 @@ module RSpecDocumentation
 
       formatter = Rouge::Formatters::HTML.new
       lexer = Rouge::Lexers::HTML.new
-      formatter.format(lexer.lex(spec.described_object))
+
+      formatter.format(lexer.lex(HtmlBeautifier.beautify(spec.described_object)))
     end
 
     def code_source

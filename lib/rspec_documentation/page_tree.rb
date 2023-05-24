@@ -10,8 +10,11 @@ module RSpecDocumentation
     end
 
     def elements
-      build_nodes
-      nodes.flatten
+      build_nodes(
+        root: tree['rspec-documentation']['pages'],
+        path: root_path.join('rspec-documentation/pages')
+      )
+      nodes.flatten.compact
     end
 
     private
@@ -25,29 +28,22 @@ module RSpecDocumentation
       end
     end
 
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    # TODO: Refactor.
-    def build_nodes(root: tree['rspec-documentation']['pages'], path: root_path.join('rspec-documentation/pages'))
+    def build_nodes(root:, path:)
       root[:children].sort.map do |child|
-        nodes.push('<li>')
-        if path.join(child).sub_ext('.html').file?
-          nodes.push("<a href='#{path.join(child).sub_ext('.html')}'>#{child.gsub(/\.md$/, '')}</a>")
-        else
-          nodes.push("<b>#{child.gsub(/\.md$/, '')}</b>")
-        end
-        nodes.push('</li>')
+        node = page_tree_node(path: path, child: child)
+        next nil if node.nil?
+
+        nodes.concat(node)
         nodes.push('<ul>')
         build_nodes(root: root[child], path: path.join(child)) unless root[child].nil?
         nodes.push('</ul>')
       end
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
-    # rubocop:disable Metrics/AbcSize
     # TODO: Refactor.
     def build_tree(branch: structure, depth: 0)
       normalized_paths.each do |path|
-        first, second, *rest = path.to_s.split('/')[depth..]
+        first, second, *rest = path_segments(path: path, depth: depth)
         next if second.nil?
 
         branch[first] ||= {}
@@ -56,7 +52,14 @@ module RSpecDocumentation
         build_tree(branch: branch[first], depth: depth + 1)
       end
     end
-    # rubocop:enable Metrics/AbcSize
+
+    def path_segments(path:, depth:)
+      path.to_s.split('/')[depth..]
+    end
+
+    def root_path
+      @root_path ||= Pathname.new(Dir.pwd)
+    end
 
     def normalized_paths
       @normalized_paths ||= page_paths.sort.map do |path|
@@ -64,8 +67,8 @@ module RSpecDocumentation
       end
     end
 
-    def root_path
-      @root_path ||= Pathname.new(Dir.pwd)
+    def page_tree_node(path:, child:)
+      PageTreeElement.new(path: path, child: child).node
     end
   end
 end
