@@ -29,6 +29,7 @@ module RSpecDocumentation
 
     def rendered_result
       return spec.described_object if spec.format == :html
+      return AnsiHTML.new(spec.described_object).render if spec.format == :ansi
 
       formatted_ruby(spec.described_object.inspect)
     end
