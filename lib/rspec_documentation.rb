@@ -14,6 +14,7 @@ require 'pathname'
 require 'securerandom'
 
 require_relative 'rspec_documentation/rspec'
+require_relative 'rspec_documentation/util'
 require_relative 'rspec_documentation/context'
 require_relative 'rspec_documentation/configuration'
 require_relative 'rspec_documentation/document'

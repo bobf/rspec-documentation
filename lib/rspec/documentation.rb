@@ -34,13 +34,17 @@ module RSpec
 
       def print_success_summary
         warn(paintbrush { green("\n  Created #{blue(page_paths.size)} pages.\n") })
-        warn(paintbrush { cyan("  View your documentation here: #{white(page_paths.last)}\n") })
+        warn(paintbrush { cyan("  View your documentation here: #{white(bundle_index_path)}\n") })
       end
 
       def print_failure_summary
         page_collection.failures.each do |failure|
           $stderr.write(failure.message)
         end
+      end
+
+      def bundle_index_path
+        page_collection.bundle_path.glob('*.html').first
       end
 
       def page_paths

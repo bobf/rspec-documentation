@@ -40,7 +40,6 @@ module RSpecDocumentation
       end
     end
 
-    # TODO: Refactor.
     def build_tree(branch: structure, depth: 0)
       normalized_paths.each do |path|
         first, second, *rest = path_segments(path: path, depth: depth)

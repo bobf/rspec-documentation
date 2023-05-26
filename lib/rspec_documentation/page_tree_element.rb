@@ -38,11 +38,19 @@ module RSpecDocumentation
     end
 
     def link
-      "<a href='#{path.join(child).sub_ext('.html')}'>#{child.gsub(/\.md$/, '')}</a>"
+      "<a href='#{href}'>#{title}</a>"
     end
 
     def bullet
-      "<b>#{Pathname.new(child).sub_ext('')}</b>"
+      "<b>#{title}</b>"
+    end
+
+    def href
+      Util.bundle_path(path.join(child))
+    end
+
+    def title
+      Util.label(child)
     end
   end
 end
