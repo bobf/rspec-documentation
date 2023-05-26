@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module RSpecDocumentation
+  # Misc utility classes for functionality shared between components, helpers for path normalization.
   class Util
-    ORDERING_PREFIX_REGEXP = /^[0-9]+-/
+    ORDERING_PREFIX_REGEXP = /^[0-9]+-/.freeze
 
     def self.bundle_path(path)
       relative_path = Pathname.new(path).relative_path_from(base_dir)

@@ -1,3 +1,46 @@
+<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#modal-<%= element_id %>-side-by-side">
+  View Side-by-side
+</button>
+
+<div class="modal fade" id="modal-<%= element_id %>-side-by-side" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-<%= element_id %>-side-by-side-label">Side-by-side view</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container p-3">
+          <div class="row border">
+            <div class="col border">
+              <div class="p-3 mb-5 code highlight">
+                <%= code_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
+              </div>
+            </div>
+
+            <% unless html_source.nil? %>
+            <div class="col border">
+              <div class="p-3 mb-5 code highlight">
+                <%= html_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
+              </div>
+            </div>
+            <% end %>
+
+            <div class="col border">
+              <div class="p-3 mb-5 <%= html_source.nil? ? 'code highlight' : nil %>">
+                <%= rendered_result %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <ul class="nav nav-tabs" id="html-tabs-<%= element_id %>" role="tablist">
 
   <li class="nav-item" role="presentation">

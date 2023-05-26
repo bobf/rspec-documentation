@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    rspec-documentation (0.0.1)
+    rspec-documentation (0.0.2)
       htmlbeautifier (~> 1.4)
       kramdown (~> 2.4)
       kramdown-parser-gfm (~> 1.1)
-      paintbrush
+      paintbrush (~> 0.1.1)
       redcarpet (~> 3.6)
       rouge (~> 4.1)
       rspec (~> 3.12)
@@ -26,7 +26,7 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     paint (2.3.0)
-    paintbrush (0.1.0)
+    paintbrush (0.1.1)
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)

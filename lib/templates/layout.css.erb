@@ -1,0 +1,39 @@
+.code {
+  font-family: monospace;
+  max-height: 30rem;
+  overflow-y: auto;
+}
+
+h1.title {
+  display: inline;
+}
+
+.header .separator {
+  display: inline-block;
+  height: 2.5rem;
+}
+
+.version {
+  color: #bbb;
+  font-size: 2rem;
+}
+
+.ansi-html {
+  display: inline-block;
+  background-color: #2e2e2e;
+  border: 5px solid #2e2e2e;
+  border-radius: 10px;
+}
+
+.ansi-html .ansi-color-0 { color: #555555; }
+.ansi-html .ansi-color-1 { color: #ff0000; }
+.ansi-html .ansi-color-2 { color: #47ff47; }
+.ansi-html .ansi-color-3 { color: #e9e947; }
+.ansi-html .ansi-color-4 { color: #49a0dd; }
+.ansi-html .ansi-color-5 { color: #8d7eeb; }
+.ansi-html .ansi-color-6 { color: #2eecff; }
+.ansi-html .ansi-color-7 { color: #ffffff; }
+.ansi-html .ansi-color-9 { color: #606060; }
+.ansi-html .ansi-color-reset { color: #dddddd; }
+
+<%= Rouge::Themes::Github.render %>

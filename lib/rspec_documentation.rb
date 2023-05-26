@@ -35,8 +35,8 @@ module RSpecDocumentation
     Pathname.new(File.dirname(__dir__))
   end
 
-  def self.template(name)
-    ERB.new(root.join('lib/templates', "#{name}.html.erb").read)
+  def self.template(name, format = :html)
+    ERB.new(root.join('lib/templates', "#{name}.#{format}.erb").read)
   end
 
   def self.context

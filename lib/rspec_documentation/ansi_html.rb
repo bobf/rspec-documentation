@@ -19,9 +19,9 @@ module RSpecDocumentation
     attr_reader :content
 
     def subbed_content
-      puts content
       COLOR_CODES.reduce(content) do |string, color_code|
         string.gsub("\e[3#{color_code}m", "</span><span class='ansi-color-#{color_code}'>")
+              .gsub("\e[0m", "</span><span class='ansi-color-reset'>")
       end.gsub(/\e\[[0-9]+m/, '')
     end
   end
