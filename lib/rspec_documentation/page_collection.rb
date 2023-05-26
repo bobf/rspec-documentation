@@ -26,7 +26,7 @@ module RSpecDocumentation
 
       @buffer.each do |path, content|
         path.dirname.mkpath
-        path.sub_ext('.html').write(content)
+        Util.bundle_path(path).write(content)
       end
     end
 

@@ -7,7 +7,7 @@ module RSpecDocumentation
 
     def self.bundle_path(path)
       relative_path = Pathname.new(path).relative_path_from(base_dir)
-      bundle_dir.join(Pathname.new(normalized_filename(relative_path)).sub_ext('.html'))
+      bundle_dir.join(*relative_path.split.map { |segment| normalized_filename(segment) }).sub_ext('.html')
     end
 
     def self.base_dir
@@ -26,6 +26,17 @@ module RSpecDocumentation
 
     def self.label(path)
       Pathname.new(path).basename.sub_ext('').sub(ORDERING_PREFIX_REGEXP, '')
+    end
+
+    def self.href(path)
+      relative_path = Pathname.new(path).relative_path_from(base_dir)
+      url_root.join(*relative_path.split.map { |segment| normalized_filename(segment) }).sub_ext('.html')
+    end
+
+    def self.url_root
+      return bundle_dir unless ENV.key?('RSPEC_DOCUMENTATION_URL_ROOT')
+
+      Pathname.new(ENV.fetch('RSPEC_DOCUMENTATION_URL_ROOT'))
     end
 
     def self.normalized_filename(path)

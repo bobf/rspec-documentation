@@ -46,7 +46,7 @@ module RSpecDocumentation
     end
 
     def href
-      Util.bundle_path(path.join(child))
+      Util.href(path.join(child))
     end
 
     def title
