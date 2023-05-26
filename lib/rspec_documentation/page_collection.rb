@@ -30,10 +30,6 @@ module RSpecDocumentation
       end
     end
 
-    def bundle_path
-      root_path.join('bundle')
-    end
-
     private
 
     attr_reader :page_paths, :buffer

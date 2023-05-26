@@ -44,7 +44,7 @@ module RSpec
       end
 
       def bundle_index_path
-        page_collection.bundle_path.glob('*.html').first
+        RSpecDocumentation::Util.bundle_dir.glob('*.html').first.expand_path
       end
 
       def page_paths

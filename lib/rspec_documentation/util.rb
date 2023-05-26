@@ -15,7 +15,9 @@ module RSpecDocumentation
     end
 
     def self.bundle_dir
-      root_dir.join('rspec-documentation', 'bundle')
+      return root_dir.join('rspec-documentation', 'bundle') unless ENV.key?('RSPEC_DOCUMENTATION_BUNDLE_PATH')
+
+      Pathname.new(ENV.fetch('RSPEC_DOCUMENTATION_BUNDLE_PATH'))
     end
 
     def self.root_dir

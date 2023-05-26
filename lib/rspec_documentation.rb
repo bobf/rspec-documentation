@@ -39,6 +39,10 @@ module RSpecDocumentation
     ERB.new(root.join('lib/templates', "#{name}.#{format}.erb").read)
   end
 
+  def self.theme(name)
+    ERB.new(root.join('lib/templates/themes', "#{name}.css").read).result(binding)
+  end
+
   def self.context
     yield configuration.context if block_given?
     configuration.context

@@ -1,11 +1,32 @@
 <html>
   <head>
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
-    integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer" />
     <style>
+
+       /* cerulean, cosmo, cyborg, darkly, flatly, journal, litera, lumen, lux, materia, minty, morph,
+          pulse, quartz, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, united, vapor,
+          yeti, zephyr */
+      <%= RSpecDocumentation.theme(:materia) %>
+
+      /* Base16, BlackWhiteTheme, Colorful, Github, Gruvbox, IgorPro, Magritte, Molokai, Monokai,
+         MonokaiSublime, Pastie, ThankfulEyes, Tulip */
+      <%= Rouge::Themes::Molokai.render %>
+
+      /* https://stackoverflow.com/a/61587938 */
+      .consistent-height .tab-content {
+        display: flex;
+      }
+
+      .consistent-height .tab-content > .tab-pane {
+        display: block; /* undo "display: none;" */
+        visibility: hidden;
+        margin-right: -100%;
+        width: 100%;
+      }
+
+      .consistent-height .tab-content > .active {
+        visibility: visible;
+      }
+
 
       .code {
         font-family: monospace;
@@ -23,8 +44,11 @@
       }
 
       .version {
-        color: #bbb;
         font-size: 2rem;
+      }
+
+      .highlight {
+        padding: 1rem;
       }
 
       .ansi-html {
@@ -34,25 +58,25 @@
         border-radius: 10px;
       }
 
-      .ansi-html .ansi-color-0 { color: #555555; }
-      .ansi-html .ansi-color-1 { color: #ff0000; }
-      .ansi-html .ansi-color-2 { color: #47ff47; }
-      .ansi-html .ansi-color-3 { color: #e9e947; }
-      .ansi-html .ansi-color-4 { color: #49a0dd; }
-      .ansi-html .ansi-color-5 { color: #8d7eeb; }
-      .ansi-html .ansi-color-6 { color: #2eecff; }
-      .ansi-html .ansi-color-7 { color: #ffffff; }
-      .ansi-html .ansi-color-9 { color: #606060; }
-      .ansi-html .ansi-color-reset { color: #dddddd; }
-
-      <%= Rouge::Themes::Github.render %>
+      .ansi-html .ansi-color-0 { color: var(--bs-dark); }
+      .ansi-html .ansi-color-1 { color: var(--bs-red); }
+      .ansi-html .ansi-color-2 { color: var(--bs-green); }
+      .ansi-html .ansi-color-3 { color: var(--bs-yellow) }
+      .ansi-html .ansi-color-4 { color: var(--bs-blue); }
+      .ansi-html .ansi-color-5 { color: var(--bs-purple); }
+      .ansi-html .ansi-color-6 { color: var(--bs-cyan); }
+      .ansi-html .ansi-color-7 { color: var(--bs-white); }
+      .ansi-html .ansi-color-9 { color: var(--bs-light); }
+      .ansi-html .ansi-color-reset { color: var(--bs-light);; }
 
     </style>
   </head>
 
   <body>
     <div class="container m-3 p-3">
-      <%= header %>
+      <div class="bg-light sticky-top">
+        <%= header %>
+      </div>
 
       <div class="row">
         <div class="col-auto page-tree fs-6 mt-1 ms-3 me-3">
