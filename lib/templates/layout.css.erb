@@ -1,11 +1,66 @@
+/* cerulean, cosmo, cyborg, darkly, flatly, journal, litera, lumen, lux, materia, minty, morph,
+   pulse, quartz, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, united, vapor,
+   yeti, zephyr */
+<%= RSpecDocumentation.theme(:materia) %>
+
+/* Base16, BlackWhiteTheme, Colorful, Github, Gruvbox, IgorPro, Magritte, Molokai, Monokai,
+   MonokaiSublime, Pastie, ThankfulEyes, Tulip */
+<%= Rouge::Theme.find('molokai').render(scope: '.highlight') %>
+
+/* https://stackoverflow.com/a/61587938 */
+.consistent-height .tab-content {
+  display: flex;
+}
+
+.consistent-height .tab-content > .tab-pane {
+  display: block; /* undo "display: none;" */
+  visibility: hidden;
+  margin-right: -100%;
+  width: 100%;
+}
+
+.consistent-height .tab-content > .active {
+  visibility: visible;
+}
+
+
 .code {
   font-family: monospace;
   max-height: 30rem;
   overflow-y: auto;
 }
 
+pre {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+div.language-console {
+  margin: 1rem;
+}
+
+div.branding {
+  text-align: right;
+}
+
 h1.title {
   display: inline;
+}
+
+.modal-body .row .col {
+  padding-top: 1rem;
+}
+
+.page-tree ul {
+  display: inline-block;
+}
+
+.page-tree li {
+  line-height: 1.8rem;
+}
+
+.page-tree li .active {
+  font-weight: bold;
 }
 
 .header .separator {
@@ -14,8 +69,16 @@ h1.title {
 }
 
 .version {
-  color: #bbb;
   font-size: 2rem;
+}
+
+.highlight {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.highlight .go {
+  color: #706d6d;
 }
 
 .ansi-html {
@@ -35,5 +98,3 @@ h1.title {
 .ansi-html .ansi-color-7 { color: #ffffff; }
 .ansi-html .ansi-color-9 { color: #606060; }
 .ansi-html .ansi-color-reset { color: #dddddd; }
-
-<%= Rouge::Themes::Github.render %>

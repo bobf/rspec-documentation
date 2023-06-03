@@ -19,10 +19,14 @@ module RSpecDocumentation
     attr_reader :content
 
     def subbed_content
-      COLOR_CODES.reduce(content) do |string, color_code|
+      COLOR_CODES.reduce(subbed_hex_codes) do |string, color_code|
         string.gsub("\e[3#{color_code}m", "</span><span class='ansi-color-#{color_code}'>")
               .gsub("\e[0m", "</span><span class='ansi-color-reset'>")
       end.gsub(/\e\[[0-9]+m/, '')
+    end
+
+    def subbed_hex_codes
+      content.gsub(/\e\[38;2;([0-9]+);([0-9]+);([0-9]+)m/, '</span><span style="color: rgb(\1,\2,\3)">')
     end
   end
 end

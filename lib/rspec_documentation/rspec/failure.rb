@@ -4,29 +4,37 @@ module RSpecDocumentation
   module RSpec
     # Stores information about a failed RSpec example. Thin wrapper around `RSpec::Failure`.
     class Failure
+      include Paintbrush
+
+      attr_reader :spec
+
       def initialize(cause:, spec:)
         @cause = cause
         @spec = spec
       end
 
       def message
-        "\n#{formatted_header}\n\n#{formatted_source}\n#{formatted_cause}\n\n"
+        "\n#{formatted_header}\n\n#{formatted_source}\n\n#{formatted_cause}\n\n"
       end
 
       private
 
-      attr_reader :cause, :spec
+      attr_reader :cause
 
       def formatted_header
-        "\e[1;37m#{indented('Failure in example')}:\e[0m"
+        paintbrush { cyan indented("# #{path}:#{spec.location}") }
+      end
+
+      def path
+        spec.path.relative_path_from(Pathname.new(Dir.pwd))
       end
 
       def formatted_source
-        "\e[1;34m#{indented(spec.source)}\e[0m"
+        paintbrush { white indented(spec.source) }
       end
 
       def formatted_cause
-        "\e[31m#{indented(cause.message)}\e[0m"
+        paintbrush { red indented(cause.message) }
       end
 
       def indented(text)

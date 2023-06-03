@@ -4,19 +4,24 @@ module RSpecDocumentation
   # Builds content for a collection of page paths, collates failures from embedded examples.
   # Writes the final structure to disk.
   class PageCollection
-    attr_reader :failures
+    attr_reader :failures, :page_paths
 
     def initialize(page_paths:)
-      @page_paths = page_paths
+      @page_paths = page_paths.sort
       @buffer = {}
       @failures = []
     end
 
     def generate
-      page_paths.sort.each do |path|
-        document = Document.new(document: path.read, page_tree: page_tree)
+      page_paths.zip(documents).each do |path, document|
         buffer[bundle_path_for(path)] = document.render
         @failures.concat(document.failures)
+      end
+    end
+
+    def documents
+      @documents ||= page_paths.map do |path|
+        Document.new(document: path.read, path: path, page_tree: page_tree(path: path))
       end
     end
 
@@ -30,12 +35,16 @@ module RSpecDocumentation
       end
     end
 
+    def examples_count
+      documents.map(&:specs).flatten.size
+    end
+
     private
 
-    attr_reader :page_paths, :buffer
+    attr_reader :buffer
 
-    def page_tree
-      PageTree.new(page_paths: page_paths)
+    def page_tree(path:)
+      PageTree.new(page_paths: page_paths, current_path: path)
     end
 
     def bundle_path_for(path)

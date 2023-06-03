@@ -1,0 +1,26 @@
+<%= RSpecDocumentation.template('bootstrap', :js).result %>
+
+(() => {
+  const pageTree = document.querySelector('.page-tree');
+
+  const getParentElement = (element) => document.querySelector(element.dataset.parentId);
+  const isRootElement = (element) => !getParentElement(element);
+  const isChildActive = (element) => !!element.querySelectorAll('.active').length;
+  const isSiblingActive = (element) => !!getParentElement(element).querySelectorAll('.active').length;
+  const isActive = (element) => element && element.classList.contains('active');
+  const isSelfOrParentActive = (element) => {
+    const listItemSelector = `[data-list-item-id="#${element.id}"]`;
+    const item = document.querySelector(listItemSelector);
+
+    if (isActive(item)) return true;
+    if (isActive(getParentElement(element))) return true;
+
+    return false;
+  };
+
+  const visibilityCriteria = [isRootElement, isSelfOrParentActive, isChildActive, isSiblingActive];
+
+  pageTree.querySelectorAll('li').forEach((element) => {
+    if (!visibilityCriteria.some((criterion) => criterion(element))) element.classList.add('d-none');
+  });
+})();

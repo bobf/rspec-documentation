@@ -5,8 +5,9 @@ module RSpecDocumentation
   class Document
     attr_reader :failures, :page_tree
 
-    def initialize(document:, page_tree:)
+    def initialize(document:, path:, page_tree:)
       @document = document
+      @path = path
       @page_tree = page_tree
       @failures = []
     end
@@ -46,12 +47,24 @@ module RSpecDocumentation
       RSpecDocumentation.template('footer').result(binding)
     end
 
+    def hide_branding?
+      ENV.key?('RSPEC_DOCUMENTATION_HIDE_BRANDING')
+    end
+
+    def stylesheet_bundle_href
+      Util.assets_root.join('bundle.css')
+    end
+
+    def javascript_bundle_src
+      Util.assets_root.join('bundle.js')
+    end
+
     private
 
-    attr_reader :document
+    attr_reader :document, :path
 
     def parsed_document
-      @parsed_document ||= ParsedDocument.new(document)
+      @parsed_document ||= ParsedDocument.new(document, path: path)
     end
 
     def gem_spec

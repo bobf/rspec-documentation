@@ -1,41 +1,4 @@
-<div class="modal fade" id="modal-<%= element_id %>-side-by-side" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal-<%= element_id %>-side-by-side-label">Side-by-side view</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="container p-3">
-          <div class="row border">
-            <div class="col border">
-              <div class="p-3 mb-5 code highlight">
-                <%= code_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
-              </div>
-            </div>
-
-            <% unless html_source.nil? %>
-            <div class="col border">
-              <div class="p-3 mb-5 code highlight">
-                <%= html_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
-              </div>
-            </div>
-            <% end %>
-
-            <div class="col border">
-              <div class="p-3 mb-5 <%= html_source.nil? ? 'code highlight' : nil %>">
-                <%= rendered_result %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+<%= RSpecDocumentation.template('modal_spec').result(binding) %>
 
 <div class="consistent-height">
 
@@ -90,7 +53,7 @@
          id="code-source-<%= element_id %>"
          role="tabpanel"
          aria-labelledby="code-source-<%= element_id %>-tab">
-      <div class="p-3 mb-5 code highlight">
+      <div class="p-3 mb-5 mt-3 code highlight">
         <%= code_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
       </div>
     </div>
@@ -100,7 +63,7 @@
          id="html-source-<%= element_id %>"
          role="tabpanel"
          aria-labelledby="html-source-<%= element_id %>-tab">
-      <div class="p-3 mb-5 code highlight">
+      <div class="p-3 mb-5 mt-3 code highlight">
         <%= html_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
       </div>
     </div>
@@ -110,7 +73,7 @@
          id="rendered-<%= element_id %>"
          role="tabpanel"
          aria-labelledby="rendered-<%= element_id %>-tab">
-      <div class="p-3 mb-5 <%= html_source.nil? ? 'code highlight' : nil %>">
+      <div class="p-3 mb-5 mt-3 <%= html_source.nil? ? 'code highlight' : nil %>">
         <%= rendered_result %>
       </div>
     </div>

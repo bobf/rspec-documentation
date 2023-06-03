@@ -3,8 +3,9 @@
 module RSpecDocumentation
   # A hierarchical structure of all pages in the documentation tree. Used for rendering a navigation section.
   class PageTree
-    def initialize(page_paths:)
+    def initialize(page_paths:, current_path:)
       @page_paths = page_paths
+      @current_path = current_path
       @structure = {}
       @nodes = []
     end
@@ -19,7 +20,7 @@ module RSpecDocumentation
 
     private
 
-    attr_reader :page_paths, :structure, :nodes
+    attr_reader :page_paths, :structure, :nodes, :current_path
 
     def tree
       @tree ||= begin
@@ -29,15 +30,22 @@ module RSpecDocumentation
     end
 
     def build_nodes(root:, path:)
-      root[:children].sort.map do |child|
+      root[:children].sort.each do |child|
         node = page_tree_node(path: path, child: child)
         next nil if node.nil?
 
-        nodes.concat(node)
-        nodes.push('<ul>')
-        build_nodes(root: root[child], path: path.join(child)) unless root[child].nil?
-        nodes.push('</ul>')
+        li_open, *li_body, li_close = node
+        nodes.push(li_open)
+        nodes.concat(li_body)
+        push_children(root: root, path: path, child: child)
+        nodes.push(li_close)
       end
+    end
+
+    def push_children(root:, path:, child:)
+      nodes.push('<ul>')
+      build_nodes(root: root[child], path: path.join(child)) unless root[child].nil?
+      nodes.last == '<ul>' ? nodes.pop : nodes.push('</ul>')
     end
 
     def build_tree(branch: structure, depth: 0)
@@ -67,7 +75,7 @@ module RSpecDocumentation
     end
 
     def page_tree_node(path:, child:)
-      PageTreeElement.new(path: path, child: child).node
+      PageTreeElement.new(path: path, child: child, current_path: current_path).node
     end
   end
 end

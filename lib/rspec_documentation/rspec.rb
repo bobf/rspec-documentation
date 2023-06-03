@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'rspec/example_group'
-require_relative 'rspec/reporter'
 require_relative 'rspec/failure'
 
 module RSpecDocumentation

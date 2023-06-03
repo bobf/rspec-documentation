@@ -10,14 +10,15 @@ _RSpec Documentation_ provides a simple but powerful system for generating _Ruby
 * Formatters for [HTML](https://en.wikipedia.org/wiki/HTML) and [ANSI color codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
 * Syntax highlighting for _Ruby_ and _HTML_, auto-formatting of _HTML_ output.
 * Outputs a static bundle of _HTML_ files that can be uploaded to e.g. [GitHub Pages](https://pages.github.com/).
-* Simple extension to _RSpec_, just call `it_documents <object> do ...` to write a documentation test, no complex _DSL_ to learn.
+* No _DSL_ to learn, simply write a regular spec that defines a `subject`. The value of `subject` is stored and included in your documentation.
 
 This documentation was written using _RSpec Documentation_.
 
 ## Quick Example
 
 ```rspec:html
-html = <<~HTML
+subject do
+<<~HTML
   <table class="table">
     <thead>
       <tr><th>Heading 1</th><th>Heading 2</th></tr>
@@ -28,10 +29,9 @@ html = <<~HTML
     </tbody>
   </table>
   HTML
-
-it_documents html do
-  expect(html).to include 'Value 1'
 end
+
+it { is_expected.to include 'Value 1' }
 ```
 
 Setting the code block language to `rspec:html` indicates that the output should be treated as _HTML_ which adds a tab displaying auto-formatted _HTML_ and another tab showing the rendered output.
