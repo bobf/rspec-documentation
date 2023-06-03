@@ -6,3 +6,4 @@ AllCops:
   NewCops: enable
   Exclude:
   - 'spec/fixtures/**/*'
+  - 'lib/rspec_documentation/page_tree.rb' # Rubocop bug, fixed in main

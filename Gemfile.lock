@@ -26,7 +26,7 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     paint (2.3.0)
-    paintbrush (0.1.1)
+    paintbrush (0.1.2)
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)

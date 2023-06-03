@@ -28,6 +28,10 @@ module RSpecDocumentation
       Pathname.new(path).basename.sub_ext('').sub(ORDERING_PREFIX_REGEXP, '')
     end
 
+    def self.path_id(path)
+      "path-id-#{Digest::SHA256.hexdigest(bundle_path(path).relative_path_from(bundle_dir).to_s)}"
+    end
+
     def self.href(path)
       relative_path = Pathname.new(path).relative_path_from(base_dir)
       url_root.join(*relative_path.split.map { |segment| normalized_filename(segment) }).sub_ext('.html')
@@ -37,6 +41,10 @@ module RSpecDocumentation
       return bundle_dir unless ENV.key?('RSPEC_DOCUMENTATION_URL_ROOT')
 
       Pathname.new(ENV.fetch('RSPEC_DOCUMENTATION_URL_ROOT'))
+    end
+
+    def self.assets_root
+      url_root.join('assets')
     end
 
     def self.normalized_filename(path)

@@ -1,0 +1,26 @@
+<%= RSpecDocumentation.template('bootstrap', :js).result %>
+
+(() => {
+  const pageTree = document.querySelector('.page-tree');
+
+  const isParentActive = (element) => {
+    const listItemSelector = `[data-list-item-id="#${element.id}"]`;
+    const item = document.querySelector(linkSelector);
+
+    if (!link) return true;
+    if (link.classList.contains('active')) return true;
+
+    const parentElement = document.querySelector(element.dataset.parentId);
+    console.log(parentElement);
+    if (!parentElement) return true;
+
+    return isParentActive(parentElement);
+  };
+
+  pageTree.querySelectorAll('li').forEach((element) => {
+    if (element.parentElement === pageTree) return;
+    if (isParentActive(element)) return;
+
+    element.classList.add('d-none');
+  });
+})();

@@ -16,13 +16,14 @@ module RSpec
       def generate_documentation
         require_spec_helper
         page_collection.generate
-        page_collection.flush unless failed?
-        print_summary
+        flush unless failed?
+        RSpecDocumentation::Summary.new(page_collection: page_collection, pwd: pwd).flush
+
         nil
       end
 
       def require_spec_helper
-        path = Pathname.new(Dir.pwd).join('rspec-documentation/spec_helper.rb')
+        path = pwd.join('rspec-documentation/spec_helper.rb')
         require path if path.file?
       end
 
@@ -32,23 +33,22 @@ module RSpec
 
       private
 
-      def print_success_summary
-        warn(paintbrush { green("\n  Created #{blue(page_paths.size)} pages.\n") })
-        warn(paintbrush { cyan("  View your documentation here: #{white(bundle_index_path)}\n") })
+      def flush
+        page_collection.flush
+        stylesheet_bundle.flush
+        javascript_bundle.flush
       end
 
-      def print_failure_summary
-        page_collection.failures.each do |failure|
-          $stderr.write(failure.message)
-        end
+      def stylesheet_bundle
+        @stylesheet_bundle ||= RSpecDocumentation::StylesheetBundle.new
       end
 
-      def bundle_index_path
-        RSpecDocumentation::Util.bundle_dir.glob('*.html').first.expand_path
+      def javascript_bundle
+        @javascript_bundle ||= RSpecDocumentation::JavascriptBundle.new
       end
 
       def page_paths
-        @page_paths ||= Pathname.new(Dir.pwd).join('rspec-documentation/pages').glob('**/*.md')
+        @page_paths ||= pwd.join('rspec-documentation/pages').glob('**/*.md')
       end
 
       def page_collection
@@ -59,14 +59,8 @@ module RSpec
         !page_collection.failures.empty?
       end
 
-      def print_summary
-        if failed?
-          print_failure_summary
-        else
-          print_success_summary
-        end
-
-        nil
+      def pwd
+        @pwd ||= Pathname.new(Dir.pwd)
       end
     end
   end

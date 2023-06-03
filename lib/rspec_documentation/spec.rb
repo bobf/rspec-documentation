@@ -3,20 +3,27 @@
 module RSpecDocumentation
   # Executes specs from a Markdown code block and provides the outcome in the appropriate format.
   class Spec
-    attr_reader :parent, :location, :index, :format
+    attr_reader :parent, :location, :index, :format, :path
 
-    def initialize(spec:, format:, parent:, location:, index:)
+    class << self
+      attr_accessor :subjects
+    end
+
+    def initialize(spec:, format:, parent:, location:, path:, index:) # rubocop:disable Metrics/ParameterLists
       @spec = spec
       @format = format.empty? ? :plaintext : format.to_sym
       @parent = parent
       @location = location
+      @path = path
       @index = index
       @failures = []
-      @reporter = RSpec::Reporter.new
     end
 
     def described_object
-      @described_object ||= reporter.described_object
+      raise Error, "Code block did not define a subject:\n#{spec}" if subjects.empty?
+      raise Error, "Cannot define more than one example per code block:\n#{spec}" if subjects.size > 1
+
+      subjects.last
     end
 
     def source
@@ -28,14 +35,19 @@ module RSpecDocumentation
     end
 
     def run
+      self.class.subjects = []
       RSpec.with_failure_notifier(failure_notifier) do
-        example_group.run(reporter)
+        example_group.run
       end
     end
 
     private
 
     attr_reader :spec, :failures, :reporter
+
+    def subjects
+      self.class.subjects
+    end
 
     def examples
       @examples ||= example_group.examples
@@ -45,7 +57,8 @@ module RSpecDocumentation
       # rubocop:disable Style/DocumentDynamicEvalDefinition, Security/Eval
       @example_group ||= binding.eval(
         <<-SPEC, __FILE__, __LINE__.to_i
-          RSpec::ExampleGroup.describe do
+          ::RSpec::Core::ExampleGroup.describe do
+            after { RSpecDocumentation::Spec.subjects << subject }
             #{spec}
           end
         SPEC

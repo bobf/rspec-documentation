@@ -6,7 +6,7 @@ Add as many files as you like and use you like into the root directory or subdir
 
 ## Example Directory Structure
 
-```
+```console
 rspec-documentation/
 └── pages/
     ├── Introduction.md

@@ -1,75 +1,6 @@
-<html>
+<html data-bs-theme="dark">
   <head>
-    <style>
-
-       /* cerulean, cosmo, cyborg, darkly, flatly, journal, litera, lumen, lux, materia, minty, morph,
-          pulse, quartz, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, united, vapor,
-          yeti, zephyr */
-      <%= RSpecDocumentation.theme(:materia) %>
-
-      /* Base16, BlackWhiteTheme, Colorful, Github, Gruvbox, IgorPro, Magritte, Molokai, Monokai,
-         MonokaiSublime, Pastie, ThankfulEyes, Tulip */
-      <%= Rouge::Themes::Molokai.render %>
-
-      /* https://stackoverflow.com/a/61587938 */
-      .consistent-height .tab-content {
-        display: flex;
-      }
-
-      .consistent-height .tab-content > .tab-pane {
-        display: block; /* undo "display: none;" */
-        visibility: hidden;
-        margin-right: -100%;
-        width: 100%;
-      }
-
-      .consistent-height .tab-content > .active {
-        visibility: visible;
-      }
-
-
-      .code {
-        font-family: monospace;
-        max-height: 30rem;
-        overflow-y: auto;
-      }
-
-      h1.title {
-        display: inline;
-      }
-
-      .header .separator {
-        display: inline-block;
-        height: 2.5rem;
-      }
-
-      .version {
-        font-size: 2rem;
-      }
-
-      .highlight {
-        padding: 1rem;
-      }
-
-      .ansi-html {
-        display: inline-block;
-        background-color: #2e2e2e;
-        border: 5px solid #2e2e2e;
-        border-radius: 10px;
-      }
-
-      .ansi-html .ansi-color-0 { color: var(--bs-dark); }
-      .ansi-html .ansi-color-1 { color: var(--bs-red); }
-      .ansi-html .ansi-color-2 { color: var(--bs-green); }
-      .ansi-html .ansi-color-3 { color: var(--bs-yellow) }
-      .ansi-html .ansi-color-4 { color: var(--bs-blue); }
-      .ansi-html .ansi-color-5 { color: var(--bs-purple); }
-      .ansi-html .ansi-color-6 { color: var(--bs-cyan); }
-      .ansi-html .ansi-color-7 { color: var(--bs-white); }
-      .ansi-html .ansi-color-9 { color: var(--bs-light); }
-      .ansi-html .ansi-color-reset { color: var(--bs-light);; }
-
-    </style>
+    <%= RSpecDocumentation.template(:stylesheet_links).result(binding) %>
   </head>
 
   <body>
@@ -92,9 +23,6 @@
       <%= footer %>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"
-            integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
+    <%= RSpecDocumentation.template(:script_tags).result(binding) %>
   </body>
 </html>

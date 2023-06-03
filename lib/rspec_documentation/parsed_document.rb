@@ -5,8 +5,9 @@ module RSpecDocumentation
   class ParsedDocument
     attr_reader :failures
 
-    def initialize(document)
-      @document = Kramdown::Document.new(document, input: 'GFM')
+    def initialize(document, path:)
+      @document = Kramdown::Document.new(document, input: 'GFM', syntax_highlighter: 'rouge')
+      @path = path
       @failures = []
     end
 
@@ -29,7 +30,7 @@ module RSpecDocumentation
 
     private
 
-    attr_reader :document
+    attr_reader :document, :path
 
     def recursive_specs(element: document.root)
       element.children.each.with_index.map do |child, index|
@@ -53,6 +54,7 @@ module RSpecDocumentation
         format: element.options[:lang].partition(':').last,
         parent: parent,
         index: index,
+        path: path,
         location: element.options[:location]
       )
     end

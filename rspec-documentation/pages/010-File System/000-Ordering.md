@@ -4,7 +4,7 @@ If you want to specify a specific order that each item will appear in the docume
 
 It is recommended to use increments of 10 when naming files to simplify re-ordering things later:
 
-```
+```console
 rspec-documentation/
 └── pages/
     ├── 000-Introduction.md
