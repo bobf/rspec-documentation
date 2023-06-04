@@ -18,6 +18,6 @@ it { is_expected.to eql 'my subject' }
 ```
 ````
 
-See the [Quickstart](introduction/quickstart.html) setup guide to build your first _RSpec Documentation_ project.
+See the [Quickstart](quickstart.html) setup guide to build your first _RSpec Documentation_ project.
 
 Browse the [Examples](examples.html) to get a better idea of the typical usage patterns.
