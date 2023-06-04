@@ -8,7 +8,7 @@ The spec defines a `subject`, a simple comparison is made on its value to satisf
 
 Any _RSpec_ test is valid, including one-liner syntax like this:
 
-### Input
+### Markdown
 
 ````markdown
 ```rspec
@@ -28,7 +28,7 @@ it { is_expected.to eql 'my value' }
 
 ## Regular `it` blocks
 
-### Input
+### Markdown
 
 ````markdown
 ```rspec

@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-<%= element_id %>-side-by-side" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-xl" id="modal-dialog-<%= element_id %>">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modal-<%= element_id %>-side-by-side-label">Side-by-side view</h5>
@@ -41,6 +41,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button"
+                class="btn btn-primary modal-dialog-maximize"
+                data-modal-dialog-id="#modal-dialog-<%= element_id %>">Full Screen</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>

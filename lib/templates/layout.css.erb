@@ -41,6 +41,34 @@ body {
   animation-delay: .1s
 }
 
+.header-wrapper {
+  background-color: #fff;
+}
+
+[data-bs-theme="dark"] .header-wrapper {
+  background-color: #212121;
+}
+
+.theme-switcher {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.theme-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.theme-light-icon path {
+  fill: #fcdb33;
+}
+
+.theme-dark-icon path {
+  fill: #63afc9;
+}
+
 h1.title a {
   text-decoration: none;
 }
@@ -89,6 +117,10 @@ ol.page-tree {
 .page-tree li {
   line-height: 1.8rem;
   white-space: nowrap;
+}
+
+.page-tree li.active {
+  list-style-type: square;
 }
 
 .page-tree li a {

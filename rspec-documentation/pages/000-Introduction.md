@@ -11,7 +11,7 @@ There is no _DSL_ to learn and vanilla _RSpec_ examples are used to generate inp
 
 ## Quick Example
 
-### Input
+### Markdown
 
 The following is an example _Markdown_ file.
 

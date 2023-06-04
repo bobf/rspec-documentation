@@ -4,17 +4,17 @@ If your code's output includes colors encoded with [ANSI Escape Codes](https://e
 
 8-bit colors and _RGB_ color codes are supported.
 
-## Input
+## Markdown
 
 ````markdown
 ```rspec:ansi
 subject do
   "\e[34mfoo\e[0m\e[0m \e[32mbar \e[36mfoo, bar, baz\e[0m\e[32m with " \
   "\e[36mqux\e[0m\e[32m and quux\e[0m\e[0m and corge with " \
-  "\e[38;2;255;0;255mRGB CYAN\e[0m\e[0m"
+  "\e[38;2;235;12;186mRGB PINK\e[0m\e[0m"
 end
 
-it { is_expected.to include "\e[38;2;255;0;255mRGB CYAN" }
+it { is_expected.to include "\e[38;2;235;12;186mRGB PINK" }
 ```
 ````
 
@@ -24,8 +24,8 @@ it { is_expected.to include "\e[38;2;255;0;255mRGB CYAN" }
 subject do
   "\e[34mfoo\e[0m\e[0m \e[32mbar \e[36mfoo, bar, baz\e[0m\e[32m with " \
   "\e[36mqux\e[0m\e[32m and quux\e[0m\e[0m and corge with " \
-  "\e[38;2;255;0;255mRGB CYAN\e[0m\e[0m"
+  "\e[38;2;235;12;186mRGB PINK\e[0m\e[0m"
 end
 
-it { is_expected.to include "\e[38;2;255;0;255mRGB CYAN" }
+it { is_expected.to include "\e[38;2;235;12;186mRGB PINK" }
 ```

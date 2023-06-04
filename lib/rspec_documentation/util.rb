@@ -5,12 +5,9 @@ module RSpecDocumentation
   class Util
     ORDERING_PREFIX_REGEXP = /^[0-9]+-/.freeze
 
-    def self.bundle_path(path, extension: '.html')
+    def self.bundle_path(path)
       relative_path = Pathname.new(path).relative_path_from(base_dir)
-      full_path = bundle_dir.join(*relative_path.split.map { |segment| normalized_filename(segment) })
-      return full_path if extension.nil?
-
-      full_path.sub_ext('.html')
+      bundle_dir.join(*relative_path.split.map { |segment| normalized_filename(segment) }).sub_ext('.html')
     end
 
     def self.bundle_index_path

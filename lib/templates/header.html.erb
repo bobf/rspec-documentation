@@ -1,4 +1,4 @@
-<div class="header text-end pt-1 pe-3">
+<div class="header text-end pt-3 pe-3">
   <% if homepage.nil? %>
     <h1 class="title"><%= title %></h1>
   <% else %>
@@ -6,6 +6,11 @@
   <% end %>
   <span class="separator border-end pb-2 ms-2 me-2"></span>
   <span class="text-secondary version"><%= version %></span>
+  <span class="separator border-end pb-2 ms-2 me-2"></span>
+  <div class="theme-switcher">
+    <%= RSpecDocumentation.template(:sun, :svg).result %>
+    <%= RSpecDocumentation.template(:moon, :svg).result %>
+  </div>
 </div>
 
 <hr/>

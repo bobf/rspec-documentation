@@ -1,27 +1,67 @@
 <%= RSpecDocumentation.template('bootstrap', :js).result %>
 
 (() => {
-  const pageTree = document.querySelector('.page-tree');
+  const initPageTree = () => {
+    const pageTree = document.querySelector('.page-tree');
 
-  const getParentElement = (element) => document.querySelector(element.dataset.parentId);
-  const isRootElement = (element) => !getParentElement(element);
-  const isChildActive = (element) => !!element.querySelectorAll('.active').length;
-  const isSiblingActive = (element) => !!getParentElement(element).querySelectorAll('.active').length;
-  const isActive = (element) => element && element.classList.contains('active');
-  const isSelfOrParentActive = (element) => {
-    const listItemSelector = `[data-list-item-id="#${element.id}"]`;
-    const item = document.querySelector(listItemSelector);
+    const getParentElement = (element) => document.querySelector(element.dataset.parentId);
+    const isRootElement = (element) => !getParentElement(element);
+    const isChildActive = (element) => !!element.querySelectorAll('.active').length;
+    const isSiblingActive = (element) => !!getParentElement(element).querySelectorAll('.active').length;
+    const isActive = (element) => element && element.classList.contains('active');
+    const isSelfOrParentActive = (element) => {
+      const listItemSelector = `[data-list-item-id="#${element.id}"]`;
+      const item = document.querySelector(listItemSelector);
 
-    if (isActive(item)) return true;
-    if (isActive(getParentElement(element))) return true;
+      if (isActive(item)) return true;
+      if (isActive(getParentElement(element))) return true;
 
-    return false;
+      return false;
+    };
+
+    const visibilityCriteria = [isRootElement, isSelfOrParentActive, isChildActive, isSiblingActive];
+
+    pageTree.querySelectorAll('li').forEach((element) => {
+      if (!visibilityCriteria.some((criterion) => criterion(element))) element.classList.add('d-none');
+    });
+    pageTree.classList.remove('hidden');
   };
 
-  const visibilityCriteria = [isRootElement, isSelfOrParentActive, isChildActive, isSiblingActive];
+  const initThemeSwitcher = () => {
+    const lightButton = document.querySelector('.theme-switcher .theme-light-icon');
+    const darkButton = document.querySelector('.theme-switcher .theme-dark-icon');
+    const html = document.querySelector('html');
+    const initialTheme = localStorage.getItem('rspec-documentation-theme') || 'light';
 
-  pageTree.querySelectorAll('li').forEach((element) => {
-    if (!visibilityCriteria.some((criterion) => criterion(element))) element.classList.add('d-none');
+    lightButton.addEventListener('click', () => {
+      lightButton.classList.add('d-none');
+      darkButton.classList.remove('d-none');
+      html.dataset.bsTheme = 'dark';
+      localStorage.setItem('rspec-documentation-theme', 'dark');
+    });
+
+    darkButton.addEventListener('click', () => {
+      darkButton.classList.add('d-none');
+      lightButton.classList.remove('d-none');
+      html.dataset.bsTheme = 'light';
+      localStorage.setItem('rspec-documentation-theme', 'light');
+    });
+
+    html.dataset.bsTheme = initialTheme;
+
+    if (initialTheme === 'light') {
+      lightButton.classList.remove('d-none');
+    } else {
+      darkButton.classList.remove('d-none');
+    }
+  };
+
+  document.querySelectorAll('button.modal-dialog-maximize').forEach((element) => {
+    element.addEventListener('click', () => {
+      document.querySelector(element.dataset.modalDialogId).classList.toggle('modal-fullscreen');
+    });
   });
-  pageTree.classList.remove('hidden');
+
+  initPageTree();
+  initThemeSwitcher();
 })();
