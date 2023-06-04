@@ -58,6 +58,7 @@ module RSpecDocumentation
       @example_group ||= binding.eval(
         <<-SPEC, __FILE__, __LINE__.to_i
           ::RSpec::Core::ExampleGroup.describe do
+            RSpecDocumentation.configuration.context.each { |key, value| let(key) { value } }
             after { RSpecDocumentation::Spec.subjects << subject }
             #{spec}
           end

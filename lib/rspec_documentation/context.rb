@@ -18,6 +18,10 @@ module RSpecDocumentation
       @context = {}
     end
 
+    def each(&block)
+      @context.each(&block)
+    end
+
     private
 
     def method_missing(key, *args, &block)

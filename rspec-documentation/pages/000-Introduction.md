@@ -1,39 +1,42 @@
 # RSpec Documentation
 
-_RSpec Documentation_ provides a simple but powerful system for generating _Ruby_ documentation using [_RSpec_](https://rspec.info/).
+_RSpec Documentation_ provides a simple but powerful system for generating _Ruby_ documentation using [_RSpec_](https://rspec.info/) designed to help you ensure that all code examples in your documentation really work.
 
-## Features
+* Create a tree of _Markdown_ files in your project directory under `rspec-documentation/pages/`.
+* Embed tests in ```` ```rspec ```` code blocks (other output formatters are available - see examples).
+* Define a `subject` for each test.
+* Run the provided `rspec-documentation` command.
 
-* Uses a simple file tree of [Markdown](https://www.markdownguide.org/) files.
-* Embed examples in [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks).
-* Generated documentation includes the original _Ruby_ code and the output of the tested object.
-* Formatters for [HTML](https://en.wikipedia.org/wiki/HTML) and [ANSI color codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
-* Syntax highlighting for _Ruby_ and _HTML_, auto-formatting of _HTML_ output.
-* Outputs a static bundle of _HTML_ files that can be uploaded to e.g. [GitHub Pages](https://pages.github.com/).
-* No _DSL_ to learn, simply write a regular spec that defines a `subject`. The value of `subject` is stored and included in your documentation.
-
-This documentation was written using _RSpec Documentation_.
+There is no _DSL_ to learn and vanilla _RSpec_ examples are used to generate inputs and outputs. No _Markdown_ language extensions are used, simply define the language of a fenced code block as `rspec` in any `.md` file and _RSpecDocumentation_ will do the rest.
 
 ## Quick Example
 
-```rspec:html
-subject do
-<<~HTML
-  <table class="table">
-    <thead>
-      <tr><th>Heading 1</th><th>Heading 2</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Value 1</td><td>Value 2</td></tr>
-      <tr><td>Value 3</td><td>Value 4</td></tr>
-    </tbody>
-  </table>
-  HTML
-end
+### Input
 
-it { is_expected.to include 'Value 1' }
+The following is an example _Markdown_ file.
+
+````console
+# An example test
+
+This is a very simple test:
+
+```rspec
+subject { 'my subject' }
+it { is_expected.to eql 'my subject' }
+```
+````
+
+### Output
+
+The above example produces this output in your documentation:
+
+```rspec
+subject { 'my subject' }
+it { is_expected.to eql 'my subject' }
 ```
 
-Setting the code block language to `rspec:html` indicates that the output should be treated as _HTML_ which adds a tab displaying auto-formatted _HTML_ and another tab showing the rendered output.
+_RSpec Documentation_ generates a static bundle of _HTML_ files ready to be uploaded to your favourite _CDN_.
 
-Browse the documentation for more examples and usage patterns.
+This documentation was written using _RSpec Documentation_.
+
+Browse the rest of the documentation for more detailed examples and configuration information.
