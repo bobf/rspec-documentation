@@ -31,9 +31,7 @@ module RSpecDocumentation
     end
 
     def title
-      return ::Rails.application.class.module_parent.name.titleize if defined?(::Rails)
-
-      gem_spec&.name
+      gem_spec&.name || 'Documentation'
     end
 
     def version
