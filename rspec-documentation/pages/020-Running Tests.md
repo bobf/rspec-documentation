@@ -3,7 +3,7 @@
 To run your test suite, just call the provided `rspec-documentation` command from your project directory:
 
 ```console
-$ exe/rspec-documentation
+$ rspec-documentation
 
   Created 5 pages.
 
@@ -13,7 +13,9 @@ $ exe/rspec-documentation
 Documentation will only be generated if all tests pass. A summary of failures is provided if the suite does not run successfully:
 
 ```console
-    # rspec-documentation/pages/030-Examples/010-Basic.md:23
+$ rspec-documentation
+
+    rspec-documentation/pages/030-Examples/010-Basic.md:23
 
     subject { 'my value' }
 

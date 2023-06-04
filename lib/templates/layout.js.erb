@@ -23,4 +23,5 @@
   pageTree.querySelectorAll('li').forEach((element) => {
     if (!visibilityCriteria.some((criterion) => criterion(element))) element.classList.add('d-none');
   });
+  pageTree.classList.remove('hidden');
 })();

@@ -1,6 +1,6 @@
 # Configuration
 
-Most _RSpecDocumentation_ features work out of the box, but you may need to configure certain features if the default configuration doesn't suit your needs.
+Most _RSpec Documentation_ features work out of the box, but you may need to configure certain features if the default configuration doesn't suit your needs.
 
 Create a [spec helper](spec-helper.html) and add the following block of code:
 

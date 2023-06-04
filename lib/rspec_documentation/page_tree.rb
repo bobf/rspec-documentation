@@ -43,9 +43,9 @@ module RSpecDocumentation
     end
 
     def push_children(root:, path:, child:)
-      nodes.push('<ul>')
+      nodes.push('<ol>')
       build_nodes(root: root[child], path: path.join(child)) unless root[child].nil?
-      nodes.last == '<ul>' ? nodes.pop : nodes.push('</ul>')
+      nodes.last == '<ol>' ? nodes.pop : nodes.push('</ol>')
     end
 
     def build_tree(branch: structure, depth: 0)

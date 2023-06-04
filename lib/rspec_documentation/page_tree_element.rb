@@ -48,7 +48,7 @@ module RSpecDocumentation
     end
 
     def link
-      "<a href='#{href}'>#{title}</a>"
+      "<a #{active_class} href='#{href}'>#{title}</a>"
     end
 
     def path_id
@@ -68,7 +68,7 @@ module RSpecDocumentation
     end
 
     def active?
-      Util.bundle_path(current_path) == href
+      Util.href(current_path) == href
     end
 
     def title

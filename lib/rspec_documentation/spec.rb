@@ -5,8 +5,11 @@ module RSpecDocumentation
   class Spec
     attr_reader :parent, :location, :index, :format, :path
 
+    @durations = []
+
     class << self
       attr_accessor :subjects
+      attr_accessor :durations
     end
 
     def initialize(spec:, format:, parent:, location:, path:, index:) # rubocop:disable Metrics/ParameterLists
@@ -34,19 +37,31 @@ module RSpecDocumentation
       failures.first
     end
 
+    def reporter
+      @reporter ||= ::RSpec::Core::Reporter.new(::RSpec::Core::Configuration.new)
+    end
+
     def run
       self.class.subjects = []
       RSpec.with_failure_notifier(failure_notifier) do
-        example_group.run
+        succeeded = example_group.run(reporter)
+        durations << reporter.examples.first.execution_result.run_time
+        next if succeeded
+
+        notify_failure(reporter.failed_examples.first.exception.all_exceptions.first)
       end
     end
 
     private
 
-    attr_reader :spec, :failures, :reporter
+    attr_reader :spec, :failures
 
     def subjects
       self.class.subjects
+    end
+
+    def durations
+      self.class.durations
     end
 
     def examples
@@ -58,19 +73,22 @@ module RSpecDocumentation
       @example_group ||= binding.eval(
         <<-SPEC, __FILE__, __LINE__.to_i
           ::RSpec::Core::ExampleGroup.describe do
-            RSpecDocumentation.configuration.context.each { |key, value| let(key) { value } }
             after { RSpecDocumentation::Spec.subjects << subject }
-            #{spec}
+            include_context '__rspec_documentation' do
+              #{spec}
+            end
           end
         SPEC
       )
       # rubocop:enable Style/DocumentDynamicEvalDefinition, Security/Eval
     end
 
+    def notify_failure(failure)
+      failures << RSpec::Failure.new(cause: failure, spec: self)
+    end
+
     def failure_notifier
-      proc do |failure|
-        failures << RSpec::Failure.new(cause: failure, spec: self)
-      end
+      proc { |failure| notify_failure(failure) }
     end
   end
 end

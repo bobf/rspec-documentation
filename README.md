@@ -1,31 +1,27 @@
 # RSpec::Documentation
 
-TODO: Delete this and the text below, and describe your gem
+_RSpec Documentation_ provides a simple but powerful system for generating _Ruby_ documentation using [_RSpec_](https://rspec.info/) designed to help you ensure that all code examples in your documentation really work.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/documentation`. To experiment with that code, run `bin/console` for an interactive prompt.
+* Create a tree of _Markdown_ files in your project directory under `rspec-documentation/pages/`.
+* Embed tests in ```` ```rspec ```` code blocks (other output formatters are available - see examples).
+* Define a `subject` for each test.
+* Run the provided `rspec-documentation` command.
 
-## Installation
+There is no _DSL_ to learn and vanilla _RSpec_ examples are used to generate inputs and outputs. No _Markdown_ language extensions are used, simply define the language of a fenced code block as `rspec` in any `.md` file and _RSpecDocumentation_ will do the rest.
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+## Quick Example
 
-Install the gem and add to the application's Gemfile by executing:
+The following is an example _Markdown_ file.
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+````console
+# An example test
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+This is a very simple test:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+```rspec
+subject { 'my subject' }
+it { is_expected.to eql 'my subject' }
+```
+````
 
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rspec-documentation.
+View the [full documentation](https://docs.bob.frl/rspec-documentation) (built using Rspec Documentation!) for detailed usage instructions.

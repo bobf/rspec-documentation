@@ -15,7 +15,7 @@ module RSpecDocumentation
     def generate
       page_paths.zip(documents).each do |path, document|
         buffer[bundle_path_for(path)] = document.render
-        @failures.concat(document.failures)
+        failures.concat(document.failures)
       end
     end
 
@@ -29,10 +29,11 @@ module RSpecDocumentation
       Util.bundle_dir.rmtree if Util.bundle_dir.directory?
       Util.bundle_dir.mkpath
 
-      @buffer.each do |path, content|
+      buffer.each do |path, content|
         path.dirname.mkpath
         Util.bundle_path(path).write(content)
       end
+      write_index unless buffer.empty?
     end
 
     def examples_count
@@ -42,6 +43,11 @@ module RSpecDocumentation
     private
 
     attr_reader :buffer
+
+    def write_index
+      _path, content = buffer.first
+      Util.bundle_index_path.write(content)
+    end
 
     def page_tree(path:)
       PageTree.new(page_paths: page_paths, current_path: path)

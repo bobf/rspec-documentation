@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 RSpec::Documentation.configure do |config|
-  config.context do |context|
-    context.foo = 'baz'
-    context.bar = 'qux'
+  config.context do
+    let(:foo) { 'baz' }
+    let(:bar) { 'qux' }
   end
 end

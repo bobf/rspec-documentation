@@ -10,6 +10,10 @@ module RSpecDocumentation
       bundle_dir.join(*relative_path.split.map { |segment| normalized_filename(segment) }).sub_ext('.html')
     end
 
+    def self.bundle_index_path
+      bundle_dir.join('index.html')
+    end
+
     def self.base_dir
       root_dir.join('rspec-documentation', 'pages')
     end

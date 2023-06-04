@@ -23,6 +23,27 @@
   visibility: visible;
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  opacity: 0;
+  animation: fade-in ease-in 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0.15s;
+  animation-delay: .1s
+}
+
+h1.title a {
+  text-decoration: none;
+}
 
 .code {
   font-family: monospace;
@@ -47,12 +68,22 @@ h1.title {
   display: inline;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .modal-body .row .col {
   padding-top: 1rem;
 }
 
-.page-tree ul {
+.page-tree ol, ol.page-tree {
   margin: 0;
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+ol.page-tree {
+  padding-left: 0;
 }
 
 .page-tree li {
@@ -60,7 +91,11 @@ h1.title {
   white-space: nowrap;
 }
 
-.page-tree li .active {
+.page-tree li a {
+  text-decoration: none;
+}
+
+.page-tree li a.active {
   font-weight: bold;
 }
 
@@ -73,8 +108,9 @@ h1.title {
   font-size: 2rem;
 }
 
-.highlight {
+div.highlight {
   padding: 1rem;
+  padding-bottom: 0.05rem;
   border-radius: 10px;
   margin-bottom: 2rem;
 }

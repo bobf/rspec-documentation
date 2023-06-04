@@ -7,7 +7,7 @@ _RSpec Documentation_ provides a simple but powerful system for generating _Ruby
 * Define a `subject` for each test.
 * Run the provided `rspec-documentation` command.
 
-There is no _DSL_ to learn and vanilla _RSpec_ examples are used to generate inputs and outputs. No _Markdown_ language extensions are used, simply define the language of a fenced code block as `rspec` in any `.md` file and _RSpecDocumentation_ will do the rest.
+There is no _DSL_ to learn and vanilla _RSpec_ examples are used to generate inputs and outputs. No _Markdown_ language extensions are used, simply define the language of a fenced code block as `rspec` in any `.md` file and _RSpec Documentation_ will do the rest.
 
 ## Quick Example
 

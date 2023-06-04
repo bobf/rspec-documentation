@@ -39,16 +39,16 @@ module RSpecDocumentation
       gem_spec&.version
     end
 
+    def homepage
+      gem_spec&.homepage
+    end
+
     def header
       RSpecDocumentation.template('header').result(binding)
     end
 
     def footer
       RSpecDocumentation.template('footer').result(binding)
-    end
-
-    def hide_branding?
-      ENV.key?('RSPEC_DOCUMENTATION_HIDE_BRANDING')
     end
 
     def stylesheet_bundle_href

@@ -1,5 +1,6 @@
-<html data-bs-theme="dark">
+<html>
   <head>
+    <meta charset="utf-8" />
     <%= RSpecDocumentation.template(:stylesheet_links).result(binding) %>
   </head>
 
@@ -9,18 +10,20 @@
         <%= header %>
       </div>
 
-      <div class="row">
-        <div class="col-sm-2 page-tree fs-6 mt-1 ms-3 me-3">
-          <% page_tree.elements.each do |element| %>
-            <%= element %>
-          <% end %>
+      <div class="row flex-nowrap">
+        <div class="col-sm-2 fs-6 mt-1 ms-3 me-3">
+          <ol class="page-tree hidden position-fixed">
+            <% page_tree.elements.each do |element| %>
+              <%= element %>
+            <% end %>
+          </ol>
         </div>
 
         <div class="col">
           <%= html %>
+          <%= footer %>
         </div>
       </div>
-      <%= footer %>
     </div>
 
     <%= RSpecDocumentation.template(:script_tags).result(binding) %>

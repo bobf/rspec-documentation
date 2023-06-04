@@ -1,5 +1,9 @@
-<div class="header p-3 m-3 w-90 text-end">
-  <h1 class="title"><%= title %></h1>
+<div class="header text-end pt-1 pe-3">
+  <% if homepage.nil? %>
+    <h1 class="title"><%= title %></h1>
+  <% else %>
+    <h1 class="title"><a target="_blank" href="<%= homepage %>"><%= title %></a></h1>
+  <% end %>
   <span class="separator border-end pb-2 ms-2 me-2"></span>
   <span class="text-secondary version"><%= version %></span>
 </div>

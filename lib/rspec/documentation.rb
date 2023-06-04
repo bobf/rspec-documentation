@@ -14,10 +14,11 @@ module RSpec
       include Paintbrush
 
       def generate_documentation
+        started_at = Time.now.utc
         require_spec_helper
         page_collection.generate
         flush unless failed?
-        RSpecDocumentation::Summary.new(page_collection: page_collection, pwd: pwd).flush
+        RSpecDocumentation::Summary.new(page_collection: page_collection, pwd: pwd, started_at: started_at).flush
 
         nil
       rescue RSpecDocumentation::MissingFileError => e
@@ -31,6 +32,9 @@ module RSpec
 
       def configure(&block)
         RSpecDocumentation.configure(&block)
+        return if RSpecDocumentation.configuration.context_defined?
+
+        RSpecDocumentation.configuration.context {}
       end
 
       private

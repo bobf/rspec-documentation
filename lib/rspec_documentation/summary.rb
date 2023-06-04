@@ -5,9 +5,10 @@ module RSpecDocumentation
   class Summary
     include Paintbrush
 
-    def initialize(page_collection:, pwd:)
+    def initialize(page_collection:, pwd:, started_at:)
       @page_collection = page_collection
       @pwd = pwd
+      @duration = Time.now.utc - started_at
     end
 
     def flush
@@ -17,17 +18,19 @@ module RSpecDocumentation
         print_failure_summary
       end
 
+      print_duration_summary
+
       nil
     end
 
     private
 
-    attr_reader :page_collection, :pwd
+    attr_reader :page_collection, :pwd, :duration
 
     def print_success_summary
       warn(paintbrush { green("\n  All specs passed.") })
       warn(paintbrush { cyan("\n  Created #{blue(page_collection.page_paths.size)} pages.\n") })
-      warn(paintbrush { cyan("  View your documentation here: #{blue(bundle_index_path)}\n") })
+      warn(paintbrush { white("  View your documentation here: #{blue(Util.bundle_index_path)}\n") })
     end
 
     def print_failure_summary
@@ -39,6 +42,10 @@ module RSpecDocumentation
       warn("\nFailed examples:\n\n")
       warn(failed_examples_summary)
       $stderr.puts
+    end
+
+    def print_duration_summary
+      warn(duration_summary)
     end
 
     def failure_summary
@@ -55,8 +62,13 @@ module RSpecDocumentation
       end.join("\n")
     end
 
-    def bundle_index_path
-      Util.bundle_path(page_collection.page_paths.first)
+    def duration_summary
+      formatted_spec_duration = Float("%.2g" % RSpecDocumentation::Spec.durations.sum)
+      formatted_total_duration = Float("%.2g" % duration)
+      paintbrush do
+        cyan "  Total build time: #{white formatted_total_duration} seconds, " \
+             "examples executed in #{white formatted_spec_duration} seconds."
+      end
     end
   end
 end

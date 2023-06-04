@@ -34,11 +34,18 @@ module RSpecDocumentation
       end
 
       def formatted_cause
-        paintbrush { red indented(cause.message) }
+        paintbrush { red indented(without_anonymous_group_text(cause.message)) }
       end
 
       def indented(text)
         text.split("\n").map { |line| "    #{line}" }.join("\n")
+      end
+
+      # If an error occurs outside of a test, RSpec will provide an error to the Reporter
+      # referring to an anonymous group due to the way specs are evaluated. This does not help
+      # with debugging so we remove it. TODO: Find a better way ?
+      def without_anonymous_group_text(text)
+        text&.gsub(/ for #<RSpec::ExampleGroups::Anonymous.*$/, '')
       end
     end
   end

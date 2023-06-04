@@ -11,8 +11,10 @@ Linking to another file in your documentation is easy. Use relative paths and ap
 
 Linking to the [Spec Helper](spec-helper.html) page using the following _Markdown_:
 
-```markdown
-[Spec Helper](spec-helper.html)
-```
+````markdown
+# rspec-documentation/pages/050-Linking.md
+
+Linking to the [Spec Helper](spec-helper.html) page using the following _Markdown_:
+````
 
 The original filename in this case is `040-Spec Helper.md`.
