@@ -2,4 +2,8 @@
 # frozen_string_literal: true
 
 require_relative '../lib/rspec/documentation'
-RSpec::Documentation.generate_documentation
+
+documentation = RSpec::Documentation.generate_documentation
+
+exit 1 if documentation.failed?
+exit 0

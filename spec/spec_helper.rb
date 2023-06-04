@@ -15,4 +15,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  RSpec.shared_context('__rspec_documentation') {} # rubocop:disable Lint/EmptyBlock, RSpec/ContextWording
 end

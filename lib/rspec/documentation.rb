@@ -14,15 +14,7 @@ module RSpec
       include Paintbrush
 
       def generate_documentation
-        started_at = Time.now.utc
-        require_spec_helper
-        page_collection.generate
-        flush unless failed?
-        RSpecDocumentation::Summary.new(page_collection: page_collection, pwd: pwd, started_at: started_at).flush
-
-        nil
-      rescue RSpecDocumentation::MissingFileError => e
-        warn(paintbrush { red e.message })
+        RSpecDocumentation::Documentation.new.tap(&:generate)
       end
 
       def require_spec_helper
@@ -34,39 +26,8 @@ module RSpec
         RSpecDocumentation.configure(&block)
         return if RSpecDocumentation.configuration.context_defined?
 
-        RSpecDocumentation.configuration.context {}
-      end
-
-      private
-
-      def flush
-        page_collection.flush
-        stylesheet_bundle.flush
-        javascript_bundle.flush
-      end
-
-      def stylesheet_bundle
-        @stylesheet_bundle ||= RSpecDocumentation::StylesheetBundle.new
-      end
-
-      def javascript_bundle
-        @javascript_bundle ||= RSpecDocumentation::JavascriptBundle.new
-      end
-
-      def page_paths
-        @page_paths ||= pwd.join('rspec-documentation/pages').glob('**/*.md')
-      end
-
-      def page_collection
-        @page_collection ||= RSpecDocumentation::PageCollection.new(page_paths: page_paths)
-      end
-
-      def failed?
-        !page_collection.failures.empty?
-      end
-
-      def pwd
-        @pwd ||= Pathname.new(Dir.pwd)
+        # Ensure `__rspec_documentation` shared context is always defined.
+        RSpecDocumentation.configuration.context {} # rubocop:disable Lint/EmptyBlock
       end
     end
   end

@@ -8,6 +8,8 @@ $ rspec-documentation
   Created 5 pages.
 
   View your documentation here: /home/bob/dev/rspec-documentation/rspec-documentation/bundle/introduction.html
+
+  Total build time: 0.63 seconds, examples executed in 0.0018 seconds.
 ```
 
 Documentation will only be generated if all tests pass. A summary of failures is provided if the suite does not run successfully:

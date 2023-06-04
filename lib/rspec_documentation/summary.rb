@@ -63,11 +63,11 @@ module RSpecDocumentation
     end
 
     def duration_summary
-      formatted_spec_duration = Float("%.2g" % RSpecDocumentation::Spec.durations.sum)
-      formatted_total_duration = Float("%.2g" % duration)
+      formatted_spec_duration = format('%.2g', RSpecDocumentation::Spec.durations.sum)
+      formatted_total_duration = format('%.2g', duration)
       paintbrush do
         cyan "  Total build time: #{white formatted_total_duration} seconds, " \
-             "examples executed in #{white formatted_spec_duration} seconds."
+             "examples executed in #{white formatted_spec_duration} seconds.\n"
       end
     end
   end

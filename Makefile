@@ -9,3 +9,4 @@ test:
 publish:
 	@RSPEC_DOCUMENTATION_URL_ROOT='/rspec-documentation' exe/rspec-documentation
 	@rsync --delete -r rspec-documentation/bundle/ docs01.bob.frl:/mnt/docs/rspec-documentation/
+	@echo 'Published.'

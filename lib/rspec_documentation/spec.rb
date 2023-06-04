@@ -8,8 +8,7 @@ module RSpecDocumentation
     @durations = []
 
     class << self
-      attr_accessor :subjects
-      attr_accessor :durations
+      attr_accessor :subjects, :durations
     end
 
     def initialize(spec:, format:, parent:, location:, path:, index:) # rubocop:disable Metrics/ParameterLists
@@ -45,10 +44,11 @@ module RSpecDocumentation
       self.class.subjects = []
       RSpec.with_failure_notifier(failure_notifier) do
         succeeded = example_group.run(reporter)
-        durations << reporter.examples.first.execution_result.run_time
-        next if succeeded
+        durations << run_time if run_time
+        next succeeded if succeeded
 
-        notify_failure(reporter.failed_examples.first.exception.all_exceptions.first)
+        notify_failure(reported_failure)
+        succeeded
       end
     end
 
@@ -83,8 +83,19 @@ module RSpecDocumentation
       # rubocop:enable Style/DocumentDynamicEvalDefinition, Security/Eval
     end
 
+    def run_time
+      return nil unless reporter&.examples&.first
+
+      @run_time ||= reporter.examples.first.execution_result.run_time
+    end
+
     def notify_failure(failure)
       failures << RSpec::Failure.new(cause: failure, spec: self)
+    end
+
+    # TODO: Figure out what to do if/when this data isn't available (maybe it's always available ?)
+    def reported_failure
+      reporter.failed_examples.first.exception.all_exceptions.first
     end
 
     def failure_notifier
