@@ -6,8 +6,10 @@ module RSpecDocumentation
     include Paintbrush
 
     def generate
+      initialize_if_empty
       start
       require_spec_helper
+      ensure_context
       page_collection.generate
       flush unless failed?
       summary.flush
@@ -27,8 +29,23 @@ module RSpecDocumentation
       require path if path.file?
     end
 
+    # Ensure `__rspec_documentation` shared context is always defined.
+    # See lib/rspec_documenation/spec.rb
+    def ensure_context
+      return if RSpecDocumentation.configuration.context_defined?
+
+      RSpecDocumentation.configuration.context {} # rubocop:disable Lint/EmptyBlock
+    end
+
     def start
+      warn(paintbrush { white "\nRunning specs..." })
       @started_at = Time.now.utc
+    end
+
+    def initialize_if_empty
+      return if Util.base_dir.exist?
+
+      ProjectInitialization.new.flush
     end
 
     def summary

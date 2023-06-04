@@ -5,6 +5,10 @@ To run your test suite, just call the provided `rspec-documentation` command fro
 ```console
 $ rspec-documentation
 
+Running specs...
+
+  8 examples, 0 failures.
+
   Created 5 pages.
 
   View your documentation here: /home/bob/dev/rspec-documentation/rspec-documentation/bundle/introduction.html

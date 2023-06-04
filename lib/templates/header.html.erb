@@ -4,8 +4,12 @@
   <% else %>
     <h1 class="title"><a target="_blank" href="<%= homepage %>"><%= title %></a></h1>
   <% end %>
-  <span class="separator border-end pb-2 ms-2 me-2"></span>
-  <span class="text-secondary version"><%= version %></span>
+
+  <% unless version.nil? %>
+    <span class="separator border-end pb-2 ms-2 me-2"></span>
+    <span class="text-secondary version"><%= version %></span>
+  <% end %>
+
   <span class="separator border-end pb-2 ms-2 me-2"></span>
   <div class="theme-switcher">
     <%= RSpecDocumentation.template(:sun, :svg).result %>

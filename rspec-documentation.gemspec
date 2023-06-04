@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.version = RSpec::Documentation::VERSION
   spec.authors = ['Bob Farrell']
   spec.email = ['git@bob.frl']
+  spec.licenses = ['MIT']
 
   spec.summary = 'RSpec documentation tool.'
   spec.description = 'Generates documentation from RSpec code blocks in Markdown files.'
@@ -30,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'htmlbeautifier', '~> 1.4'
   spec.add_runtime_dependency 'kramdown', '~> 2.4'
   spec.add_runtime_dependency 'kramdown-parser-gfm', '~> 1.1'
-  spec.add_runtime_dependency 'paintbrush', '~> 0.1.1'
+  spec.add_runtime_dependency 'paintbrush', '~> 0.1.3'
   spec.add_runtime_dependency 'redcarpet', '~> 3.6'
   spec.add_runtime_dependency 'rouge', '~> 4.1'
   spec.add_runtime_dependency 'rspec', '~> 3.12'

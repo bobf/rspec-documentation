@@ -14,24 +14,24 @@ module RSpecDocumentation
       Kramdown::Document.new(tabbed_spec, input: 'html').root
     end
 
-    def html_source
-      return nil unless spec.format == :html
-
-      formatter = Rouge::Formatters::HTML.new
-      lexer = Rouge::Lexers::HTML.new
-
-      formatter.format(lexer.lex(HtmlBeautifier.beautify(spec.described_object)))
-    end
-
     def code_source
-      formatted_ruby(spec.source)
+      formatter = Rouge::Formatters::HTML.new
+      lexer = Rouge::Lexers::Ruby.new
+      Formatters.with_translated_html_entities(formatter.format(lexer.lex(spec.source)))
     end
 
-    def rendered_result
-      return spec.described_object if spec.format == :html
-      return AnsiHTML.new(spec.described_object).render if spec.format == :ansi
+    def prettified_output
+      Formatters.with_translated_html_entities(formatter.prettified_output)
+    end
 
-      formatted_ruby(spec.described_object.inspect)
+    def rendered_output
+      return formatter.rendered_output if render_raw?
+
+      Formatters.with_translated_html_entities(formatter.rendered_output)
+    end
+
+    def render_raw?
+      formatter.render_raw?
     end
 
     def element_id
@@ -42,14 +42,17 @@ module RSpecDocumentation
 
     attr_reader :spec
 
-    def tabbed_spec
-      RSpecDocumentation.template('tabbed_spec').result(binding)
+    def formatter
+      @formatter ||= {
+        html: Formatters::Html,
+        ansi: Formatters::Ansi,
+        json: Formatters::Json,
+        yaml: Formatters::Yaml
+      }.fetch(spec.format, Formatters::Ruby).new(subject: spec.subject)
     end
 
-    def formatted_ruby(code)
-      formatter = Rouge::Formatters::HTML.new
-      lexer = Rouge::Lexers::Ruby.new
-      formatter.format(lexer.lex(code))
+    def tabbed_spec
+      RSpecDocumentation.template('tabbed_spec').result(binding)
     end
   end
 end

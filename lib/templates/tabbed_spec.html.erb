@@ -12,10 +12,10 @@
               type="button"
               role="tab"
               aria-controls="code-source"
-              aria-selected="true">Code</button>
+              aria-selected="true">Spec</button>
     </li>
 
-    <% unless html_source.nil? %>
+    <% unless prettified_output.nil? %>
     <li class="nav-item" role="presentation">
       <button class="nav-link"
               id="html-source-<%= element_id %>-tab"
@@ -36,7 +36,7 @@
               type="button"
               role="tab"
               aria-controls="rendered"
-              aria-selected="false"><%= html_source.nil? ? 'Output' : 'Rendered HTML' %></button>
+              aria-selected="false"><%= prettified_output.nil? ? 'Output' : 'Rendered Output' %></button>
     </li>
 
     <li class="nav-item bs-auto ms-auto mb-2">
@@ -54,17 +54,17 @@
          role="tabpanel"
          aria-labelledby="code-source-<%= element_id %>-tab">
       <div class="p-3 mb-5 mt-3 code highlight">
-        <%= code_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
+        <%= code_source %>
       </div>
     </div>
 
-    <% unless html_source.nil? %>
+    <% unless prettified_output.nil? %>
     <div class="tab-pane fade"
          id="html-source-<%= element_id %>"
          role="tabpanel"
          aria-labelledby="html-source-<%= element_id %>-tab">
       <div class="p-3 mb-5 mt-3 code highlight">
-        <%= html_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
+        <%= prettified_output %>
       </div>
     </div>
     <% end %>
@@ -73,8 +73,8 @@
          id="rendered-<%= element_id %>"
          role="tabpanel"
          aria-labelledby="rendered-<%= element_id %>-tab">
-      <div class="p-3 mb-5 mt-3 <%= html_source.nil? ? 'code highlight' : nil %>">
-        <%= rendered_result %>
+      <div class="p-3 mb-5 mt-3 <%= render_raw? ? nil : 'code highlight' %>">
+        <%= rendered_output %>
       </div>
     </div>
   </div>

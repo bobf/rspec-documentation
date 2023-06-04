@@ -1,3 +1,5 @@
+project=rspec-documentation
+
 .PHONY: test
 test:
 	bundle exec rspec
@@ -7,6 +9,6 @@ test:
 
 .PHONY: publish
 publish:
-	@RSPEC_DOCUMENTATION_URL_ROOT='/rspec-documentation' exe/rspec-documentation
-	@rsync --delete -r rspec-documentation/bundle/ docs01.bob.frl:/mnt/docs/rspec-documentation/
+	@RSPEC_DOCUMENTATION_URL_ROOT='/$(project)' exe/rspec-documentation
+	@rsync --delete -r rspec-documentation/bundle/ docs01.bob.frl:/mnt/docs/$(project)/
 	@echo 'Published.'

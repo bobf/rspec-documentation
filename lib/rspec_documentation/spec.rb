@@ -21,7 +21,8 @@ module RSpecDocumentation
       @failures = []
     end
 
-    def described_object
+    def subject
+      raise Error, "Code block did not define an example (e.g. with `it`).\n#{spec}" if examples.empty?
       raise Error, "Code block did not define a subject:\n#{spec}" if subjects.empty?
       raise Error, "Cannot define more than one example per code block:\n#{spec}" if subjects.size > 1
 
@@ -93,9 +94,11 @@ module RSpecDocumentation
       failures << RSpec::Failure.new(cause: failure, spec: self)
     end
 
-    # TODO: Figure out what to do if/when this data isn't available (maybe it's always available ?)
     def reported_failure
-      reporter.failed_examples.first.exception.all_exceptions.first
+      exception = reporter.failed_examples.first.exception
+      return exception unless exception.is_a?(::RSpec::Core::MultipleExceptionError)
+
+      exception.all_exceptions.first
     end
 
     def failure_notifier

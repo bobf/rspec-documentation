@@ -3,6 +3,14 @@
 
 require_relative '../lib/rspec/documentation'
 
+# Try to load Rails and config/environment.rb, but don't panic if not present, we only use Rails
+# to fetch things like application name etc.
+begin
+  require 'rails'
+  require Pathname.new(Dir.pwd).join('config/environment')
+rescue LoadError # rubocop:disable Lint/SuppressedException
+end
+
 documentation = RSpec::Documentation.generate_documentation
 
 exit 1 if documentation.failed?

@@ -1,0 +1,35 @@
+# Introduction
+
+Welcome to _RSpec Documentation_! This is your first documentation page.
+
+Here's an example spec:
+
+```rspec
+subject { true }
+
+it { is_expected.to be true }
+```
+
+And here's another:
+
+```rspec:html
+subject { '<h1>Title</h1><button class="btn btn-primary">Button</button>' }
+
+it { is_expected.to include 'Button' }
+```
+
+And here's one more:
+
+```rspec:ansi
+subject { "\e[35mSome purple text\e[0m" }
+
+it { is_expected.to include 'purple text' }
+```
+
+See the [documentation](https://docs.bob.frl/rspec-documentation) for more information on adding more content to your documentation.
+
+Run the `rspec-documentation` command any time you want to generate your documentation bundle:
+
+```console
+$ rspec-documentation
+```

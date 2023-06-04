@@ -31,7 +31,8 @@ module RSpecDocumentation
     end
 
     def title
-      # TODO: Try other methods of inferring documentation title, allow setting by configuration
+      return ::Rails.application.class.module_parent.name.titleize if defined?(::Rails)
+
       gem_spec&.name
     end
 

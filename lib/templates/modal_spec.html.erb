@@ -9,32 +9,32 @@
         <div class="container p-3">
           <div class="row border">
             <div class="col border">
-              <h5>Code</h5>
+              <h5>Spec</h5>
               <hr/>
               <div class="p-3 mb-5 code highlight">
-                <%= code_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
+                <%= code_source %>
               </div>
             </div>
 
-            <% unless html_source.nil? %>
+            <% unless prettified_output.nil? %>
             <div class="col border">
               <h5>Output</h5>
               <hr/>
               <div class="p-3 mb-5 code highlight">
-                <%= html_source.gsub("\n", '<br/>').gsub('  ', '&nbsp;&nbsp;') %>
+                <%= prettified_output %>
               </div>
             </div>
             <% end %>
 
             <div class="col border">
-              <% if html_source.nil? %>
+              <% if prettified_output.nil? %>
                 <h5>Output</h5>
               <% else %>
-                <h5>Rendered HTML</h5>
+                <h5>Rendered Output</h5>
               <% end %>
               <hr/>
-              <div class="p-3 mb-5 <%= html_source.nil? ? 'code highlight' : nil %>">
-                <%= rendered_result %>
+              <div class="p-3 mb-5 <%= render_raw? ? nil : 'code highlight' %>">
+                <%= rendered_output %>
               </div>
             </div>
           </div>
