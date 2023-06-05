@@ -24,7 +24,6 @@ module RSpecDocumentation
     def subject
       raise Error, "Code block did not define an example (e.g. with `it`).\n#{spec}" if examples.empty?
       raise Error, "Code block did not define a subject:\n#{spec}" if subjects.empty?
-      raise Error, "Cannot define more than one example per code block:\n#{spec}" if subjects.size > 1
 
       subjects.last
     end
@@ -74,7 +73,7 @@ module RSpecDocumentation
       @example_group ||= binding.eval(
         <<-SPEC, __FILE__, __LINE__.to_i
           ::RSpec::Core::ExampleGroup.describe do
-            after { RSpecDocumentation::Spec.subjects << subject }
+            after { RSpecDocumentation::Spec.subjects << subject if RSpecDocumentation::Spec.subjects.empty? }
             include_context '__rspec_documentation' do
               #{spec}
             end

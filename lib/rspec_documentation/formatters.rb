@@ -5,6 +5,7 @@ require_relative 'formatters/html'
 require_relative 'formatters/ansi'
 require_relative 'formatters/json'
 require_relative 'formatters/yaml'
+require_relative 'formatters/xml'
 
 module RSpecDocumentation
   # Provides a set of formatters for rendering the value of a `subject` in an RSpec example into

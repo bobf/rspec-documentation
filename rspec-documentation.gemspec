@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'htmlbeautifier', '~> 1.4'
   spec.add_runtime_dependency 'kramdown', '~> 2.4'
   spec.add_runtime_dependency 'kramdown-parser-gfm', '~> 1.1'
+  spec.add_runtime_dependency 'nokogiri', '~> 1.15'
   spec.add_runtime_dependency 'paintbrush', '~> 0.1.3'
   spec.add_runtime_dependency 'redcarpet', '~> 3.6'
   spec.add_runtime_dependency 'rouge', '~> 4.1'

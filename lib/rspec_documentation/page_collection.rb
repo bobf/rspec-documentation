@@ -7,7 +7,7 @@ module RSpecDocumentation
     attr_reader :failures, :page_paths
 
     def initialize(page_paths:)
-      @page_paths = page_paths.sort_by { |path| path.to_s }
+      @page_paths = page_paths.sort_by(&:to_s)
       @buffer = {}
       @failures = []
     end

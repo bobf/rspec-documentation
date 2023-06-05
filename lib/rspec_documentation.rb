@@ -17,6 +17,8 @@ require 'json'
 require 'yaml'
 require 'date'
 require 'time'
+require 'pp' # rubocop:disable Lint/RedundantRequireStatement
+require 'stringio'
 
 require_relative 'rspec_documentation/rspec'
 require_relative 'rspec_documentation/util'

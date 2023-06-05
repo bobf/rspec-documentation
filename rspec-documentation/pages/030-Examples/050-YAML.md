@@ -1,7 +1,6 @@
 # YAML
 
-
-If your code outputs _YAML_, use the ```` ```rspec:yaml``` ```` formatter to prettify your _YAML_ output. Note that your code must produce a raw _YAML_ string in order to use this formatter, it does not convert _Ruby_ objects into _YAML_.
+If your code outputs _YAML_, use the ```` ```rspec:yaml ```` formatter to prettify your _YAML_ output. Note that your code must produce a raw _YAML_ string in order to use this formatter, it does not convert _Ruby_ objects into _YAML_.
 
 ## Markdown
 

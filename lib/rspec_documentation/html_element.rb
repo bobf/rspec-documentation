@@ -47,7 +47,8 @@ module RSpecDocumentation
         html: Formatters::Html,
         ansi: Formatters::Ansi,
         json: Formatters::Json,
-        yaml: Formatters::Yaml
+        yaml: Formatters::Yaml,
+        xml: Formatters::Xml
       }.fetch(spec.format, Formatters::Ruby).new(subject: spec.subject)
     end
 

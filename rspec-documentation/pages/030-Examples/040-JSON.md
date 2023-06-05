@@ -1,6 +1,6 @@
 # JSON
 
-If your code outputs _JSON_, use the ```` ```rspec:json``` ```` formatter to prettify your _JSON_ output. Note that your code must produce a raw _JSON_ string in order to use this formatter, it does not convert _Ruby_ objects into _JSON_.
+If your code outputs _JSON_, use the ```` ```rspec:json ```` formatter to prettify your _JSON_ output. Note that your code must produce a raw _JSON_ string in order to use this formatter, it does not convert _Ruby_ objects into _JSON_.
 
 ## Markdown
 
