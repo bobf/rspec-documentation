@@ -24,4 +24,6 @@ it { is_expected.to eql 'my subject' }
 ```
 ````
 
+## Documentation
+
 View the [full documentation](https://docs.bob.frl/rspec-documentation) (built using Rspec Documentation!) for detailed usage instructions.
