@@ -13,7 +13,7 @@ There is no _DSL_ to learn and vanilla _RSpec_ examples are used to generate inp
 
 The following is an example _Markdown_ file.
 
-````console
+````markdown
 # An example test
 
 This is a very simple test:
