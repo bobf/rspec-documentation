@@ -4,10 +4,10 @@
 
 ````markdown
 ```rspec
-subject { 'my value' }
+subject { 'my other value' }
 
 it 'contains some expected text' do
-  expect(subject).to eql 'my value'
+  expect(subject).to eql 'other value'
 end
 ```
 ````

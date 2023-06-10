@@ -3,8 +3,11 @@
 module RSpecDocumentation
   # Configures the rspec-documentation gem, allows setting a context that makes values available to each example.
   class Configuration
+    attr_reader :hooks
+
     def initialize
       @context_defined = false
+      @hooks = {}
     end
 
     def context_defined?
@@ -23,6 +26,10 @@ module RSpecDocumentation
 
       @context_defined = true
       ::RSpec.shared_context('__rspec_documentation', &block)
+    end
+
+    def hook(name, &block)
+      hooks[name] = block
     end
   end
 end

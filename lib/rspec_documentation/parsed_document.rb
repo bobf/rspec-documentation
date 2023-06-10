@@ -12,7 +12,7 @@ module RSpecDocumentation
     end
 
     def html
-      document.to_html
+      document.to_html_rspec_documentation
     end
 
     def execute_and_substitute_examples!

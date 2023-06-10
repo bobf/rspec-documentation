@@ -15,7 +15,7 @@ $ RSPEC_DOCUMENTATION_BUNDLE_PATH=/tmp/my-documentation-bundle/ rspec-documentat
 
   Created 13 pages.
 
-  View your documentation here: /tmp/my-documentation-bundle/introduction.html
+  View your documentation here: /tmp/my-documentation-bundle/index.html
 ```
 
 ## `RSPEC_DOCUMENTATION_URL_ROOT`
@@ -29,5 +29,5 @@ $ RSPEC_DOCUMENTATION_URL_ROOT=/rspec-documentation rspec-documentation
 
   Created 13 pages.
 
-  View your documentation here: /home/bob/dev/rspec-documentation/rspec-documentation/bundle/introduction.html
+  View your documentation here: /home/bob/dev/rspec-documentation/rspec-documentation/bundle/index.html
 ```

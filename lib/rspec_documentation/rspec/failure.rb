@@ -14,7 +14,7 @@ module RSpecDocumentation
       end
 
       def message
-        "\n#{formatted_header}\n\n#{formatted_source}\n\n#{formatted_cause}\n\n"
+        "\n#{formatted_header}\n\n#{formatted_source}\n\n#{formatted_cause}\n\n#{formatted_backtrace}\n\n"
       end
 
       private
@@ -35,6 +35,13 @@ module RSpecDocumentation
 
       def formatted_cause
         paintbrush { red indented(without_anonymous_group_text(cause.message)) }
+      end
+
+      def formatted_backtrace
+        cause.backtrace
+             .take_while { |line| line.start_with?(Dir.pwd) }
+             .map { |line| paintbrush { red "    #{line.sub("#{Dir.pwd}/", '')}" } }
+             .join("\n")
       end
 
       def indented(text)

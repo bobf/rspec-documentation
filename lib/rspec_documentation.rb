@@ -37,11 +37,14 @@ require_relative 'rspec_documentation/documentation'
 require_relative 'rspec_documentation/page_collection'
 require_relative 'rspec_documentation/page_tree'
 require_relative 'rspec_documentation/page_tree_element'
+require_relative 'rspec_documentation/kramdown_html_converter'
 
 # Internal module used by RSpec::Documentation to run examples and write output into an HTML document.
 module RSpecDocumentation
   class Error < StandardError; end
   class MissingFileError < Error; end
+
+  @hooks = {}
 
   def self.root
     Pathname.new(File.dirname(__dir__))
@@ -56,6 +59,10 @@ module RSpecDocumentation
 
   def self.theme(name)
     ERB.new(root.join('lib/templates/themes', "#{name}.css").read).result(binding)
+  end
+
+  def self.hook(name)
+    configuration.hooks.fetch(name, nil)&.call
   end
 
   def self.context

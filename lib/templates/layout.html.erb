@@ -2,6 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <%= RSpecDocumentation.template(:stylesheet_links).result(binding) %>
+    <%= RSpecDocumentation.hook(:after_head) %>
   </head>
 
   <body>
@@ -9,6 +10,8 @@
       <div class="header-wrapper sticky-top">
         <%= header %>
       </div>
+
+      <%= RSpecDocumentation.hook(:after_header) %>
 
       <div class="row flex-nowrap">
         <div class="col-sm-2 fs-6 mt-1 ms-3 me-3">
@@ -19,9 +22,13 @@
           </ol>
         </div>
 
+        <%= RSpecDocumentation.hook(:before_content) %>
+
         <div class="col content" style="max-width: 80%">
           <%= html %>
+          <%= RSpecDocumentation.hook(:after_content) %>
           <%= footer %>
+          <%= RSpecDocumentation.hook(:after_footer) %>
         </div>
       </div>
     </div>

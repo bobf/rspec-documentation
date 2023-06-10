@@ -71,7 +71,7 @@ module RSpecDocumentation
     def example_group
       # rubocop:disable Style/DocumentDynamicEvalDefinition, Security/Eval
       @example_group ||= binding.eval(
-        <<-SPEC, __FILE__, __LINE__.to_i
+        <<-SPEC, path.to_s, location
           ::RSpec::Core::ExampleGroup.describe do
             after { RSpecDocumentation::Spec.subjects << subject if RSpecDocumentation::Spec.subjects.empty? }
             include_context '__rspec_documentation' do
