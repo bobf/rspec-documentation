@@ -39,9 +39,9 @@ module RSpecDocumentation
 
       def formatted_backtrace
         cause.backtrace
-             .take_while { |line| line.start_with?(Dir.pwd) }
-             .map { |line| paintbrush { red "    #{line.sub("#{Dir.pwd}/", '')}" } }
-             .join("\n")
+             &.take_while { |line| line.start_with?(Dir.pwd) }
+             &.map { |line| paintbrush { red "    #{line.sub("#{Dir.pwd}/", '')}" } }
+             &.join("\n")
       end
 
       def indented(text)

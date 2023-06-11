@@ -7,6 +7,7 @@
    MonokaiSublime, Pastie, ThankfulEyes, Tulip */
 <%= Rouge::Theme.find('molokai').render(scope: '.highlight') %>
 
+<% if RSpecDocumentation.configuration.consistent_height %>
 /* https://stackoverflow.com/a/61587938 */
 .consistent-height .tab-content {
   display: flex;
@@ -22,6 +23,7 @@
 .consistent-height .tab-content > .active {
   visibility: visible;
 }
+<% end %>
 
 @keyframes fade-in {
   from {
@@ -88,7 +90,7 @@ h1.title a {
 
 .code {
   font-family: monospace;
-  max-height: 30rem;
+  max-height: <%= RSpecDocumentation.configuration.max_height %>;
   overflow-y: auto;
 }
 

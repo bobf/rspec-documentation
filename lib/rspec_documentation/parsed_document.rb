@@ -18,7 +18,7 @@ module RSpecDocumentation
     def execute_and_substitute_examples!
       specs.each do |spec|
         spec.run
-        break failures << spec.failure unless spec.failure.nil?
+        next failures << spec.failure unless spec.failure.nil?
 
         spec.parent.children[spec.index] = spec_element(spec)
       end

@@ -4,9 +4,12 @@ module RSpecDocumentation
   # Configures the rspec-documentation gem, allows setting a context that makes values available to each example.
   class Configuration
     attr_reader :hooks
+    attr_accessor :consistent_height, :max_height
 
     def initialize
       @context_defined = false
+      @consistent_height = false
+      @max_height = '30rem'
       @hooks = {}
     end
 
