@@ -6,7 +6,7 @@ If your code outputs _YAML_, use the ```` ```rspec:yaml ```` formatter to pretti
 
 ````markdown
 ```rspec:yaml
-subject do
+subject(:yaml) do
   {
     'key' => 'value',
     'array' => [1, 2, 3],
@@ -16,7 +16,7 @@ subject do
 end
 
 it 'has expected key/value' do
-  expect(YAML.safe_load(subject)).to include({ 'key' => 'value' })
+  expect(YAML.safe_load(yaml)).to include({ 'key' => 'value' })
 end
 ```
 ````
@@ -24,7 +24,7 @@ end
 ## Output
 
 ```rspec:yaml
-subject do
+subject(:yaml) do
   {
     'key' => 'value',
     'array' => [1, 2, 3],
@@ -34,6 +34,6 @@ subject do
 end
 
 it 'has expected key/value' do
-  expect(YAML.safe_load(subject)).to include({ 'key' => 'value' })
+  expect(YAML.safe_load(yaml)).to include({ 'key' => 'value' })
 end
 ```

@@ -22,6 +22,10 @@ module RSpecDocumentation
       @failed || !page_collection.failures.empty?
     end
 
+    def page_collection
+      @page_collection ||= RSpecDocumentation::PageCollection.new(page_paths: page_paths)
+    end
+
     private
 
     def require_spec_helper
@@ -71,10 +75,6 @@ module RSpecDocumentation
 
     def page_paths
       @page_paths ||= pwd.join('rspec-documentation/pages').glob('**/*.md')
-    end
-
-    def page_collection
-      @page_collection ||= RSpecDocumentation::PageCollection.new(page_paths: page_paths)
     end
 
     def pwd

@@ -18,6 +18,7 @@ module RSpecDocumentation
 
     def render
       parsed_document.execute_and_substitute_examples!
+
       if parsed_document.failures.empty?
         RSpecDocumentation.template('layout').result(binding)
       else

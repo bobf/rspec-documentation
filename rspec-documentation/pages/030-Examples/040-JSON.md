@@ -6,7 +6,7 @@ If your code outputs _JSON_, use the ```` ```rspec:json ```` formatter to pretti
 
 ````markdown
 ```rspec:json
-subject do
+subject(:json) do
   {
     'key' => 'value',
     'array' => [1, 2, 3],
@@ -16,7 +16,7 @@ subject do
 end
 
 it 'has expected key/value' do
-  expect(JSON.parse(subject)).to include({ 'key' => 'value' })
+  expect(JSON.parse(json)).to include({ 'key' => 'value' })
 end
 ```
 ````
@@ -24,7 +24,7 @@ end
 ## Output
 
 ```rspec:json
-subject do
+subject(:json) do
   {
     'key' => 'value',
     'array' => [1, 2, 3],
@@ -34,6 +34,6 @@ subject do
 end
 
 it 'has expected key/value' do
-  expect(JSON.parse(subject)).to include({ 'key' => 'value' })
+  expect(JSON.parse(json)).to include({ 'key' => 'value' })
 end
 ```
