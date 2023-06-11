@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'devpack'
 require 'nokogiri'
 
 RSpec::Documentation.configure do |config|

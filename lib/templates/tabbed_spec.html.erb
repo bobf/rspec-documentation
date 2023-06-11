@@ -5,7 +5,7 @@
   <ul class="nav nav-tabs" id="html-tabs-<%= element_id %>" role="tablist">
 
     <li class="nav-item" role="presentation">
-      <button class="nav-link active"
+      <button class="no_toc nav-link active"
               id="code-source-<%= element_id %>-tab"
               data-bs-toggle="tab"
               data-bs-target="#code-source-<%= element_id %>"
@@ -17,7 +17,7 @@
 
     <% unless prettified_output.nil? %>
     <li class="nav-item" role="presentation">
-      <button class="nav-link"
+      <button class="no_toc nav-link"
               id="html-source-<%= element_id %>-tab"
               data-bs-toggle="tab"
               data-bs-target="#html-source-<%= element_id %>"
@@ -29,7 +29,7 @@
     <% end %>
 
     <li class="nav-item" role="presentation">
-      <button class="nav-link"
+      <button class="no_toc nav-link"
               id="rendered-<%= element_id %>-tab"
               data-bs-toggle="tab"
               data-bs-target="#rendered-<%= element_id %>"
@@ -40,7 +40,7 @@
     </li>
 
     <li class="nav-item bs-auto ms-auto mb-2">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= element_id %>-side-by-side">
+      <button type="button" class="no_toc btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= element_id %>-side-by-side">
         View Side-by-side
       </button>
     </li>

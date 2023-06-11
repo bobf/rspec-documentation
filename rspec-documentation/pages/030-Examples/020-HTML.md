@@ -1,4 +1,4 @@
-## HTML
+# HTML
 
 Setting the code block language to `rspec:html` indicates that the output should be treated as _HTML_ which adds a tab displaying auto-formatted _HTML_ and another tab showing the rendered output.
 

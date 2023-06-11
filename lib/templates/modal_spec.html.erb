@@ -2,14 +2,14 @@
   <div class="modal-dialog modal-xl" id="modal-dialog-<%= element_id %>">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modal-<%= element_id %>-side-by-side-label">Side-by-side view</h5>
+        <h5 class="no_toc modal-title" id="modal-<%= element_id %>-side-by-side-label">Side-by-side view</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container p-3">
           <div class="row border">
             <div class="col border">
-              <h5>Spec</h5>
+              <h5 class="no_toc">Spec</h5>
               <hr/>
               <div class="p-3 mb-5 code highlight">
                 <%= code_source %>
@@ -18,7 +18,7 @@
 
             <% unless prettified_output.nil? %>
             <div class="col border">
-              <h5>Output</h5>
+              <h5 class="no_toc">Output</h5>
               <hr/>
               <div class="p-3 mb-5 code highlight">
                 <%= prettified_output %>
@@ -28,9 +28,9 @@
 
             <div class="col border">
               <% if prettified_output.nil? %>
-                <h5>Output</h5>
+                <h5 class="no_toc">Output</h5>
               <% else %>
-                <h5>Rendered Output</h5>
+                <h5 class="no_toc">Rendered Output</h5>
               <% end %>
               <hr/>
               <div class="p-3 mb-5 border <%= render_raw? ? nil : 'code highlight' %>">

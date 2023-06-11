@@ -48,15 +48,15 @@ module RSpecDocumentation
       nodes.last == '<ol>' ? nodes.pop : nodes.push('</ol>')
     end
 
-    def build_tree(branch: structure, depth: 0)
-      normalized_paths.each do |path|
+    def build_tree(paths: normalized_paths, branch: structure, depth: 0)
+      paths.each do |path|
         first, second, *rest = path_segments(path: path, depth: depth)
         next if second.nil?
 
         branch[first] ||= {}
         branch[first][:children] ||= Set.new
         branch[first][:children].add(second)
-        build_tree(branch: branch[first], depth: depth + 1)
+        build_tree(paths: filtered_paths(path), branch: branch[first], depth: depth + 1)
       end
     end
 
@@ -72,6 +72,10 @@ module RSpecDocumentation
       @normalized_paths ||= page_paths.sort.map do |path|
         path.relative_path_from(root_path)
       end
+    end
+
+    def filtered_paths(path)
+      normalized_paths.select { |normalized_path| normalized_path.to_s.start_with?(path.sub_ext('').to_s) }
     end
 
     def page_tree_node(path:, child:)

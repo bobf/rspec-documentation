@@ -62,6 +62,24 @@
     });
   });
 
+  initTableOfContents = () => {
+    const tableOfContents = document.querySelector('#markdown-toc');
+
+    if (!tableOfContents) return;
+
+    const wrapper = document.createElement('div');
+    const content = document.querySelector('div.content');
+    const title = document.createElement('div');
+
+    title.append('Links');
+    title.classList.add('title');
+    wrapper.append(title);
+    wrapper.append(tableOfContents);
+    wrapper.classList.add('table-of-contents-wrapper');
+    content.prepend(wrapper);
+  };
+
   initPageTree();
   initThemeSwitcher();
+  initTableOfContents();
 })();

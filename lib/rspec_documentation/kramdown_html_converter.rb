@@ -9,6 +9,19 @@ module Kramdown
         element.attr['class'] ||= 'rspec-documentation-table table'
         super
       end
+
+      def convert_header(element, indent)
+        [
+          '<div class="heading">',
+          super,
+          "<a class='heading-anchor' href='##{element.attr['id']}'>#{link_icon}</a>",
+          '</div>'
+        ].join
+      end
+
+      def link_icon
+        @link_icon ||= RSpecDocumentation.template(:link, :svg).result
+      end
     end
   end
 end

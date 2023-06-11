@@ -9,6 +9,7 @@ module RSpecDocumentation
       print_welcome
       create_base_dir
       create_sample_files
+      create_spec_helper
       print_initialization_complete
     end
 
@@ -29,6 +30,13 @@ module RSpecDocumentation
         Util.base_dir.join(sample_file).sub_ext('.md').write(RSpecDocumentation.template(sample_file, :md).result)
         print_created(Util.base_dir.join(sample_file).sub_ext('.md'))
       end
+    end
+
+    def create_spec_helper
+      return if Util.spec_helper_path.exist?
+
+      Util.spec_helper_path.write(RSpecDocumentation.template(:spec_helper, :rb).result)
+      print_created(Util.spec_helper_path)
     end
 
     def print_created(path)

@@ -14,6 +14,10 @@ module RSpecDocumentation
       bundle_dir.join('index.html')
     end
 
+    def self.spec_helper_path
+      root_dir.join('rspec-documentation/spec_helper.rb')
+    end
+
     def self.base_dir
       root_dir.join('rspec-documentation', 'pages')
     end
@@ -52,7 +56,9 @@ module RSpecDocumentation
     end
 
     def self.normalized_filename(path)
-      path.to_s.gsub(' ', '-').downcase.sub(ORDERING_PREFIX_REGEXP, '')
+      path.split.map do |segment|
+        segment.to_s.gsub(' ', '-').downcase.sub(ORDERING_PREFIX_REGEXP, '')
+      end.join('/')
     end
   end
 end

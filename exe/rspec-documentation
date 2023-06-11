@@ -3,6 +3,21 @@
 
 require_relative '../lib/rspec/documentation'
 
+require 'optparse'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: rspec-documentation [options]'
+  opts.on('-F', '--fail-fast', 'Abort the run after the first failure.') { |val| options[:fail_fast] = val if val }
+  opts.on('-b', '--backtrace', 'Enable full backtrace.') { |val| options[:full_backtrace] = val if val }
+end.parse!
+
+RSpec::Documentation.configure do |config|
+  config.fail_fast = options[:fail_fast] if options.key?(:fail_fast)
+  config.full_backtrace = options[:full_backtrace] if options.key?(:full_backtrace)
+end
+
 documentation = RSpec::Documentation.generate_documentation
 
 exit 1 if documentation.failed?

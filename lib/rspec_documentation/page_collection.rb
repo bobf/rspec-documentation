@@ -6,6 +6,8 @@ module RSpecDocumentation
   class PageCollection
     attr_reader :failures, :page_paths
 
+    include Paintbrush
+
     def initialize(page_paths:)
       @page_paths = page_paths.sort_by(&:to_s)
       @buffer = {}
@@ -16,6 +18,7 @@ module RSpecDocumentation
       page_paths.zip(documents).each do |path, document|
         buffer[bundle_path_for(path)] = document.render
         failures.concat(document.failures)
+        break if RSpecDocumentation.configuration.fail_fast && !failures.empty?
       end
     end
 

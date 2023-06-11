@@ -16,26 +16,11 @@ Running specs...
   Total build time: 0.63 seconds, examples executed in 0.0018 seconds.
 ```
 
-Documentation will only be generated if all tests pass. A summary of failures is provided if the suite does not run successfully:
+## Options
 
-```console
-$ rspec-documentation
+The following command-line options are supported:
 
-    rspec-documentation/pages/030-Examples/010-Basic.md:23
-
-    subject { 'my value' }
-
-    it { is_expected.to eql 'not my value' }
-
-
-    expected: "not my value"
-         got: "my value"
-
-    (compared using eql?)
-
-6 examples, 1 failure.
-
-Failed examples:
-
-  rspec-documentation/pages/030-Examples/010-Basic.md:23
-```
+|Option|Variant|Description|
+|-|-|-|
+|`--fail-fast`|`-F`|Abort the run after the first failure.|
+|`--backtrace`|`-b`|Enable full backtrace.|

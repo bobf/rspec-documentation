@@ -39,7 +39,7 @@ module RSpecDocumentation
 
       def formatted_backtrace
         cause.backtrace
-             &.take_while { |line| line.start_with?(Dir.pwd) }
+             &.take_while { |line| RSpecDocumentation.configuration.full_backtrace || line.start_with?(Dir.pwd) }
              &.map { |line| paintbrush { red "    #{line.sub("#{Dir.pwd}/", '')}" } }
              &.join("\n")
       end

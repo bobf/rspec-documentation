@@ -52,6 +52,64 @@ table.rspec-documentation-table td, table.rspec-documentation-table th {
   padding: 0.5rem 1rem;
 }
 
+.table-of-contents-wrapper {
+  position: relative;
+  padding: 0.4rem 0.8rem;
+  background-color: #f3f3f329;
+  display: inline-block;
+  float: right;
+  margin-left: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #cfcfcf;
+}
+
+.table-of-contents-wrapper .title {
+  text-align: center;
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+#markdown-toc {
+  list-style: disc;
+  line-height: 1.8rem;
+  padding: 0;
+  margin-bottom: 0;
+  padding-left: 1rem;
+}
+
+[data-bs-theme="dark"] .table-of-contents-wrapper {
+  border-color: #444242;
+  background-color: #4e4e4e55;
+}
+
+[data-bs-theme="dark"] .table-of-contents-wrapper .title {
+  border-color: #444242;
+}
+
+.heading-anchor {
+  padding: 0.2rem;
+  vertical-align: middle;
+  display: inline-block;
+  padding-bottom: 0.4rem;
+}
+
+.heading-anchor svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.heading-anchor svg path {
+  fill: #7ac0f8;
+}
+
+#markdown-toc li a {
+  text-decoration: none;
+}
+
 [data-bs-theme="dark"] table.rspec-documentation-table td, [data-bs-theme="dark"] table.rspec-documentation-table th {
   border: 1px solid #4e4e4e;
 }
@@ -86,6 +144,16 @@ table.rspec-documentation-table td, table.rspec-documentation-table th {
 
 h1.title a {
   text-decoration: none;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  display: inline-block;
+}
+
+.heading-anchor {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: rgb(122,192,248);
 }
 
 .code {

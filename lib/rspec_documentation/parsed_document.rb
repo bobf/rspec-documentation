@@ -5,8 +5,16 @@ module RSpecDocumentation
   class ParsedDocument
     attr_reader :failures
 
+    include Paintbrush
+
     def initialize(document, path:)
-      @document = Kramdown::Document.new(document, input: 'GFM', syntax_highlighter: 'rouge')
+      @document = Kramdown::Document.new(
+        document,
+        toc_levels: 2...6,
+        input: 'GFM',
+        syntax_highlighter: 'rouge',
+        auto_ids: true
+      )
       @path = path
       @failures = []
     end
@@ -16,11 +24,11 @@ module RSpecDocumentation
     end
 
     def execute_and_substitute_examples!
+      print_empty if specs.empty?
       specs.each do |spec|
         spec.run
-        next failures << spec.failure unless spec.failure.nil?
-
-        spec.parent.children[spec.index] = spec_element(spec)
+        process_outcome(spec)
+        break if RSpecDocumentation.configuration.fail_fast && !failures.empty?
       end
     end
 
@@ -65,8 +73,34 @@ module RSpecDocumentation
       end
     end
 
+    def process_outcome(spec)
+      if spec.failure.nil?
+        print_success(spec)
+        spec.parent.children[spec.index] = spec_element(spec)
+      else
+        print_failure(spec)
+        failures << spec.failure
+      end
+    end
+
+    def relative_path
+      path.relative_path_from(Util.base_dir)
+    end
+
     def report_error(spec)
       $stderr.write(spec.failure.message)
+    end
+
+    def print_empty
+      warn(paintbrush { cyan "    #{relative_path}" })
+    end
+
+    def print_success(spec)
+      warn(paintbrush { green "    #{relative_path}:#{spec.location}" })
+    end
+
+    def print_failure(spec)
+      warn(paintbrush { red "    #{relative_path}:#{spec.location}" })
     end
   end
 end

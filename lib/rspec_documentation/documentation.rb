@@ -25,8 +25,7 @@ module RSpecDocumentation
     private
 
     def require_spec_helper
-      path = pwd.join('rspec-documentation/spec_helper.rb')
-      require path if path.file?
+      require Util.spec_helper_path if Util.spec_helper_path.file?
     end
 
     # Ensure `__rspec_documentation` shared context is always defined.

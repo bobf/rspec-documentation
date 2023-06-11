@@ -1,6 +1,6 @@
-## Regular `it` blocks
+# Regular `it` blocks
 
-### Markdown
+## Markdown
 
 ````markdown
 ```rspec
@@ -12,7 +12,7 @@ end
 ```
 ````
 
-### Output
+## Output
 
 ```rspec
 subject { 'my other value' }

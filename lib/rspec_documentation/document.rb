@@ -63,11 +63,17 @@ module RSpecDocumentation
     attr_reader :document, :path
 
     def parsed_document
-      @parsed_document ||= ParsedDocument.new(document, path: path)
+      @parsed_document ||= ParsedDocument.new(with_table_of_contents(document), path: path)
     end
 
     def gem_spec
       @gem_spec ||= Gem::Specification.load(Pathname.new(Dir.pwd).glob('*.gemspec').first.to_s)
+    end
+
+    def with_table_of_contents(markdown)
+      return markdown unless RSpecDocumentation.configuration.table_of_contents
+
+      ['* TOC', '{:toc}', markdown].join("\n")
     end
   end
 end
