@@ -44,7 +44,7 @@ module RSpecDocumentation
 
     def li_open
       "<li id='#{Util.path_id(path.join(child))}' #{active_class} data-list-item-id='##{path_id}' " \
-        "data-parent-id='##{parent_path_id}'>"
+        "data-search-tokens='#{Util.tokens(child).to_json}' data-parent-id='##{parent_path_id}'>"
     end
 
     def link

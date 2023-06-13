@@ -1,5 +1,5 @@
 require:
-- 'rspec-documentation/rubocop'
+- 'rubocop-rspec-documentation'
 - 'rubocop-rake'
 - 'rubocop-rspec'
 

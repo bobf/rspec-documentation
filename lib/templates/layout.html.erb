@@ -15,6 +15,12 @@
 
       <div class="row flex-nowrap">
         <div class="col-sm-2 fs-6 mt-1 ms-3 me-3">
+          <% if RSpecDocumentation.configuration.index_search %>
+          <div class="index-search">
+            <input type="text" class="index-search-field form-control" placeholder="Search" />
+          </div>
+          <% end %>
+
           <ol class="page-tree hidden position-fixed">
             <% page_tree.elements.each do |element| %>
               <%= element %>

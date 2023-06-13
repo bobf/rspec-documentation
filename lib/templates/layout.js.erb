@@ -1,10 +1,11 @@
 <%= RSpecDocumentation.template('bootstrap', :js).result %>
 
 (() => {
-  const initPageTree = () => {
-    const pageTree = document.querySelector('.page-tree');
+  const pageTree = document.querySelector('.page-tree');
+  const getParentElement = (element) => document.querySelector(element.dataset.parentId);
+  const pageSearchTokens = {};
 
-    const getParentElement = (element) => document.querySelector(element.dataset.parentId);
+  const initPageTree = () => {
     const isRootElement = (element) => !getParentElement(element);
     const isChildActive = (element) => !!element.querySelectorAll('.active').length;
     const isSiblingActive = (element) => !!getParentElement(element).querySelectorAll('.active').length;
@@ -22,7 +23,14 @@
     const visibilityCriteria = [isRootElement, isSelfOrParentActive, isChildActive, isSiblingActive];
 
     pageTree.querySelectorAll('li').forEach((element) => {
-      if (!visibilityCriteria.some((criterion) => criterion(element))) element.classList.add('d-none');
+      element.classList.remove('search-active');
+      pageSearchTokens[element.id] = JSON.parse(element.dataset.searchTokens);
+
+      if (!visibilityCriteria.some((criterion) => criterion(element))) {
+        element.classList.add('d-none');
+      } else {
+        element.classList.remove('d-none');
+      }
     });
     pageTree.classList.remove('hidden');
   };
@@ -79,7 +87,49 @@
     content.prepend(wrapper);
   };
 
+  initIndexSearch = () => {
+    const indexSearch = document.querySelector('.index-search');
+    const indexSearchField = indexSearch.querySelector('input');
+    const getQueryTokens = () => indexSearchField.value.toLowerCase().split(/\s+/);
+
+    indexSearch.addEventListener('keyup', (ev) => searchIndex(getQueryTokens()));
+    indexSearch.addEventListener('change', (ev) => searchIndex(getQueryTokens()));
+
+    searchIndex = (searchTokens) => {
+      if (!searchTokens.every((searchToken) => searchToken)) {
+        initPageTree();
+        return;
+      }
+
+      const unhideRecursively = (element) => {
+        const parentElement = getParentElement(element);
+
+        element.classList.remove('d-none');
+
+        if (parentElement) unhideRecursively(parentElement);
+      };
+
+      const getMatchingTokens = (tokens) => {
+        const anyMatchingTokens = (token) => tokens.some((expectedToken) => expectedToken.includes(token))
+        return searchTokens.filter((token) => anyMatchingTokens(token));
+      };
+
+      pageTree.querySelectorAll('li').forEach((element) => {
+        const elementSearchTokens = pageSearchTokens[element.id];
+
+        if (getMatchingTokens(elementSearchTokens).length) {
+          element.classList.add('search-active');
+          unhideRecursively(element);
+        } else {
+          element.classList.add('d-none');
+          element.classList.remove('search-active');
+        }
+      });
+    };
+  };
+
   initPageTree();
   initThemeSwitcher();
   initTableOfContents();
+  initIndexSearch();
 })();

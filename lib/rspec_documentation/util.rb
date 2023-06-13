@@ -33,7 +33,11 @@ module RSpecDocumentation
     end
 
     def self.label(path)
-      Pathname.new(path).basename.sub_ext('').sub(ORDERING_PREFIX_REGEXP, '')
+      Pathname.new(path).basename.sub_ext('').sub(ORDERING_PREFIX_REGEXP, '').to_s
+    end
+
+    def self.tokens(path)
+      label(path).downcase.split
     end
 
     def self.path_id(path)

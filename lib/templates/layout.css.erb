@@ -35,6 +35,35 @@
   }
 }
 
+[data-bs-theme="dark"] .table-of-contents-wrapper {
+  border-color: #444242;
+  background-color: #4e4e4e55;
+}
+
+[data-bs-theme="dark"] .table-of-contents-wrapper .title {
+  border-color: #444242;
+}
+
+[data-bs-theme="dark"] table.rspec-documentation-table td, [data-bs-theme="dark"] table.rspec-documentation-table th {
+  border: 1px solid #4e4e4e;
+}
+
+[data-bs-theme="dark"] table.rspec-documentation-table tr:hover td {
+  background-color: #325d8833;
+}
+
+[data-bs-theme="dark"] .header-wrapper {
+  background-color: #212121;
+}
+
+[data-bs-theme="dark"] .form-control {
+  color: #b2b2b2;
+}
+
+[data-bs-theme="dark"] input.form-control::placeholder {
+  color: #999;
+}
+
 body {
   opacity: 0;
   animation: fade-in ease-in 1;
@@ -45,11 +74,25 @@ body {
 
 .header-wrapper {
   background-color: #fff;
+  z-index: 100000;
+}
+
+table.rspec-documentation-table tr:hover td {
+  background-color: #8a8d9124;
 }
 
 table.rspec-documentation-table td, table.rspec-documentation-table th {
   border: 1px solid #cdcdcd;
   padding: 0.5rem 1rem;
+}
+
+.index-search {
+  margin-bottom: 1rem;
+}
+
+.page-tree li.search-active {
+  list-style: circle;
+  list-style-color: green;
 }
 
 .table-of-contents-wrapper {
@@ -81,13 +124,8 @@ table.rspec-documentation-table td, table.rspec-documentation-table th {
   padding-left: 1rem;
 }
 
-[data-bs-theme="dark"] .table-of-contents-wrapper {
-  border-color: #444242;
-  background-color: #4e4e4e55;
-}
-
-[data-bs-theme="dark"] .table-of-contents-wrapper .title {
-  border-color: #444242;
+#markdown-toc ul {
+  padding-left: 1rem;
 }
 
 .heading-anchor {
@@ -95,6 +133,7 @@ table.rspec-documentation-table td, table.rspec-documentation-table th {
   vertical-align: middle;
   display: inline-block;
   padding-bottom: 0.4rem;
+  scroll-padding-top: 5rem;
 }
 
 .heading-anchor svg {
@@ -108,14 +147,6 @@ table.rspec-documentation-table td, table.rspec-documentation-table th {
 
 #markdown-toc li a {
   text-decoration: none;
-}
-
-[data-bs-theme="dark"] table.rspec-documentation-table td, [data-bs-theme="dark"] table.rspec-documentation-table th {
-  border: 1px solid #4e4e4e;
-}
-
-[data-bs-theme="dark"] .header-wrapper {
-  background-color: #212121;
 }
 
 .theme-switcher {
@@ -148,6 +179,7 @@ h1.title a {
 
 .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
   display: inline-block;
+  scroll-margin-top: 6rem;
 }
 
 .heading-anchor {
@@ -158,6 +190,7 @@ h1.title a {
 
 .code {
   font-family: monospace;
+  font-size: 0.9rem;
   max-height: <%= RSpecDocumentation.configuration.max_height %>;
   overflow-y: auto;
 }

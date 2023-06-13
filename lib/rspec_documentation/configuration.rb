@@ -4,7 +4,7 @@ module RSpecDocumentation
   # Configures the rspec-documentation gem, allows setting a context that makes values available to each example.
   class Configuration
     attr_reader :hooks
-    attr_accessor :consistent_height, :max_height, :fail_fast, :full_backtrace, :table_of_contents
+    attr_accessor :consistent_height, :max_height, :fail_fast, :full_backtrace, :table_of_contents, :index_search
 
     def initialize
       @context_defined = false
@@ -13,6 +13,7 @@ module RSpecDocumentation
       @fail_fast = false
       @full_backtrace = false
       @table_of_contents = true
+      @index_search = true
       @hooks = {}
     end
 

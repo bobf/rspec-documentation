@@ -1,8 +1,16 @@
 # RuboCop
 
-_RSpec::Documentation_ provides a [RuboCop](https://rubocop.org) extension which allows _RuboCop_ to extract all examples from your documentation pages and identify any failures.
+An extension gem for [RuboCop](https://rubocop.org) is available. The extension allows _RuboCop_ to extract all examples from your documentation pages and identify any failures. With the extension enabled, a `rubocop` run will include all of the examples in your documentation seamlessly.
 
 It is highly recommended to use the official [`rubocop-rspec`](https://github.com/rubocop/rubocop-rspec) extension in conjunction with _RSpec::Documentation_.
+
+## Installation
+
+Add the following to your `Gemfile`:
+
+```ruby
+gem 'rubocop-rspec-documentation', require: false
+```
 
 ## Configuration
 
@@ -12,13 +20,12 @@ Add the following configuration to your `.rubocop.yml` to enable the extension:
 # .rubocop.yml
 
 require:
-- rspec-documentation/rubocop
-- rubocop-rspec # Omit if you prefer not to use the `rubocop-rspec` extension.
+- rubocop-rspec-documentation
 ```
 
 _RuboCop_ will now look for files in `rspec-documentation/pages/**/*.md` and the provided extension will do the required parsing/extracting/offsetting, allowing _RuboCop_ to work as normal.
 
-The following cops are disabled as they cannot be sensibly addressed within each example:
+The following cops are disabled for your documentation examples as they cannot be sensibly addressed within each example:
 
 * `Naming/FileName`
 * `Gemspec/RequiredRubyVersion`
