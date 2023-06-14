@@ -95,6 +95,14 @@
     indexSearch.addEventListener('keyup', (ev) => searchIndex(getQueryTokens()));
     indexSearch.addEventListener('change', (ev) => searchIndex(getQueryTokens()));
 
+    document.addEventListener('keydown', (ev) => {
+      console.log(ev.keyCode);
+      if (ev.ctrlKey && ev.keyCode === 191) {
+        ev.preventDefault();
+        indexSearchField.focus();
+      }
+    });
+
     searchIndex = (searchTokens) => {
       if (!searchTokens.every((searchToken) => searchToken)) {
         initPageTree();
