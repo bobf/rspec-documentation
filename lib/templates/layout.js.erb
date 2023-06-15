@@ -92,11 +92,17 @@
     const indexSearchField = indexSearch.querySelector('input');
     const getQueryTokens = () => indexSearchField.value.toLowerCase().split(/\s+/);
 
-    indexSearch.addEventListener('keyup', (ev) => searchIndex(getQueryTokens()));
+    indexSearch.addEventListener('keyup', (ev) => {
+      if (ev.keyCode === 13) {
+        const anchor = pageTree.querySelector('li.search-active a');
+        if (anchor) window.location = anchor.href;
+      } else {
+        searchIndex(getQueryTokens());
+      }
+    });
     indexSearch.addEventListener('change', (ev) => searchIndex(getQueryTokens()));
 
     document.addEventListener('keydown', (ev) => {
-      console.log(ev.keyCode);
       if (ev.ctrlKey && ev.keyCode === 191) {
         ev.preventDefault();
         indexSearchField.focus();
