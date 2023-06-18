@@ -15,5 +15,5 @@ gem 'rspec-its', '~> 1.3'
 gem 'rubocop', '~> 1.52'
 gem 'rubocop-rake', '~> 0.6.0'
 gem 'rubocop-rspec', '~> 2.22'
-gem 'rubocop-rspec-documentation', require: false
+gem 'rubocop-rspec-documentation', '~> 0.0.1', require: false
 gem 'strong_versions', '~> 0.4.5'

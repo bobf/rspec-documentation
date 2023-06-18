@@ -30,6 +30,7 @@ The following cops are disabled for your documentation examples as they cannot b
 * `Naming/FileName`
 * `Gemspec/RequiredRubyVersion`
 * `Style/FrozenStringLiteralComment`
+* `Lint/RedundantCopEnableDirective`
 
 ## Autocorrect
 
