@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec-documentation (0.0.9)
+    rspec-documentation (0.0.10)
       htmlbeautifier (~> 1.4)
       kramdown (~> 2.4)
       kramdown-parser-gfm (~> 1.1)
