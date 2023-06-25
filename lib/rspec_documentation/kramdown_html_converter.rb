@@ -6,11 +6,18 @@ module Kramdown
     # Applies a custom CSS class to Markdown tables when rendered to HTML.
     class HtmlRspecDocumentation < Converter::Html
       def convert_table(element, indent)
+        return super if rspec_documentation_example?
+
         element.attr['class'] ||= 'rspec-documentation-table table'
         super
       end
 
       def convert_header(element, indent)
+        if rspec_documentation_example?
+          element.attr['class'] = "no_toc #{element.attr['class']}"
+          return super
+        end
+
         [
           '<div class="heading">',
           super,
@@ -21,6 +28,12 @@ module Kramdown
 
       def link_icon
         @link_icon ||= RSpecDocumentation.template(:link, :svg).result
+      end
+
+      private
+
+      def rspec_documentation_example?
+        @stack.any? { |frame| frame.attr['class']&.include?('rspec-documentation-example') }
       end
     end
   end

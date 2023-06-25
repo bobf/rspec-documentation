@@ -17,7 +17,9 @@ module RSpecDocumentation
 
     def print_welcome
       warn(paintbrush { blue "\nWelcome to #{cyan 'RSpec Documentation'}. A new project is being initialized.\n" })
-      warn(paintbrush { blue "If you want undo at any point, simply delete #{cyan 'rspec-documentation/'}.\n" })
+      warn(paintbrush do
+        blue "If you want to undo at any point, simply delete the #{cyan 'rspec-documentation/'}  directory.\n"
+      end)
     end
 
     def create_base_dir
